@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.17">
+  <POU Name="MAIN" Id="{663606dc-46bb-4216-84ba-d074cddeb072}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+
+
+VAR
+
+	GETCPUCOUNTER: GETCPUCOUNTER; //CPU tick function block definition
+	previous_low_ticks,low_ticks,high_ticks: UDINT; //Vars to hold the cpu tick count
+	
+	
+	test: DINT; //I don't know what this is
+	sqlResult : WSTRING(255);//I don't think we need this anymore either
+	bsqlError: BOOL;//same ehere
+	
+	numberOfLinesOut: LINT; //and here
+	Scaled_control: LREAL;//this moved too
+
+	fbTON: TON := (PT := TIME#1S0MS); //PID TON TIMER.
+	restartTime: TON := (PT := TIME#60S0MS);//AUTO RESTART TIMER
+
+	
+
+	getHost: FB_GetHostName; //Get host name function block definition
+	myName: STRING(255); //Var to hold host name. If the host name is more than 255 chars you're doing something wrong.
+	
+	FB_WritePersistentData: FB_WritePersistentData;
+	GETSYSTEMTIME:GETSYSTEMTIME;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[/////////////////////////////////////////////////////////////
+//CALCULATE CYCLE TIME FOR PLC
+previous_low_ticks := low_ticks;
+//GETCPUCOUNTER(cpuCntLoDW=> low_ticks, cpuCntHiDW=> high_ticks);
+GETSYSTEMTIME(timeLoDW=> low_ticks, timeHiDW=> high_ticks);
+//low ticks is a 64 bit int and rolls over into high ticks once in a while. So we make sure we're not calculating the overflow
+IF previous_low_ticks < low_ticks THEN 
+	GVL.cycleTime := UDINT_TO_LREAL(low_ticks-previous_low_ticks)*0.000000100;//Each tick is 100ns
+END_IF
+
+/////////////////////////////////////////////////////////////
+//GET HOST NAME AND CONCAT URLS FOR HMI SCREENS
+//we need the hostname because "localhost" doesn't work if
+//you're connected remotely, duh
+getHost(bExecute:= TRUE, sHostName=>myName );
+GVL.programURL:=CONCAT('http://',myName);
+GVL.programURL:=CONCAT(GVL.programURL,':8050');
+GVL.graphURL:=CONCAT('http://',myName);
+GVL.graphURL:=CONCAT(GVL.graphURL,':8050/graph');
+/////////////////////////////////////////////////////////////
+//VARIOUS PROGRAMS THAT NEED TO RUN EVERY CYCLE
+IO(); //Input/Output tasks and calculations
+Humidity();
+OkToRun();//Alarms
+fbTON();//Timer for some functions that we don't want to run every cycle
+restartTime();//Timer for auto restart in the event of an error. Set to 60 seconds
+AlarmLogger();//Log alarms (if any)
+GVL.fbLocalSystemTime(sNetID:= '', bEnable:= TRUE, dwCycle:= 1);//Get the current date and time
+
+/////////////////////////////////////////////////////////////
+//VARIOUS PROGRAMS THAT DO NOT RUN EVERY CYCLE
+
+IF fbTON.Q=TRUE THEN //when the timer is true (every 1 second)
+	POU();//Run the PID
+	HumidityPID();
+	fbTON.IN:=FALSE; //reset the timer
+	FB_WritePersistentData(NETID:='', PORT:=851, START:=TRUE, TMOUT:=T#1S ); //Write persistent data 
+	Scheduler();//Checking/setting program schedule
+ELSE
+	fbTON.IN:=TRUE; //If the timer is not true...keep timing until it is!
+END_IF
+/////////////////////////////////////////////////////////////
+//MAIN STATE MACHINE
+CASE GVL.iState OF
+	//STARTUP
+	0:
+		
+		GVL.reset:=TRUE; //RESET THE PID MEMORY BEFORE STARTING. THIS IS IMPORTANT.
+		Scheduler.resetSchedule:=TRUE; //RESET THE SCHEDULE BACK TO THE BEGINNING 
+		
+		IF GVL.sInfoText='' THEN//If the info text is blank, give the user a hint to get started
+			GVL.sInfoText:='Setup programs & settings then Start';
+		END_IF
+		//Check if user presses start button	
+		IF GVL.HMIPowerButton=TRUE THEN
+
+			DatabaseStateMachine.bStepStart:=TRUE; //STEP START MEANS THE FIRST SETPOINT WILL BE STEPPED TO GET STARTED. MORE INFO IN DOCS
+			DatabaseStateMachine(); //ALL SETPOINTS ARE CONTROLLED BY THE DATABASE STATE MACHINE. THIS PROGRAM IS IMPORTANT.
+			
+			GVL.sAlarmText:='Wait for Startup...';
+			GVL.sInfoText:='Checking Setpoints...';
+			IF DatabaseStateMachine.allOutputsSet=TRUE AND GVL.okToRun=TRUE THEN //Once everything is set, we can move on to the next state
+				GVL.iState:=1;
+				
+			END_IF
+	
+		END_IF
+		
+		IF GVL.manualMode THEN
+			GVL.iState:=254;
+		END_IF
+	
+	1:
+		//Runninng
+
+		GVL.reset:=FALSE; //Don't reset the PID while running
+		
+		DatabaseStateMachine.bStepStart:=FALSE;//Don't need step start because we're already running!
+		DatabaseStateMachine();//Running the statemachine....
+		GVL.sInfoText:=''; //Everything is good! We don't need any info text
+		
+		//Check if shutdown
+		//Lots of things can make OktoRun False. Check the sub program and the Docs.
+		IF GVL.okToRun=FALSE THEN 
+			GVL.iState:=2;
+		END_IF
+		
+	2:
+	//Shutdown
+	
+	IF GVL.bCriticalAlarm=FALSE THEN //If shutdown with no error
+		
+		GVL.iState:=0;
+
+		
+	ELSIF GVL.bCriticalAlarm=TRUE THEN//If shutdown WITH error
+
+		restartTime.IN:=TRUE;
+		GVL.sInfoText:='Acknowledge alarm or wait for auto restart';
+		IF restartTime.Q THEN //Try restarting after the timer has elapsed
+			GVL.HMIPowerButton:=TRUE;
+			GVL.bCriticalAlarm:=FALSE;
+			restartTime.IN:=FALSE;
+			GVL.iState:=1;
+			GVL.sInfoText:='Error occured...restarting';
+		ELSIF GVL.bActiveAlarm=FALSE THEN //Clear error if the user has pressed the acknowledge alarm button
+			restartTime.IN:=FALSE;
+			GVL.bCriticalAlarm:=FALSE;
+			GVL.iState:=0;
+			GVL.sInfoText:='Alarm acknowledged, please manually restart program ';
+		END_IF
+
+	END_IF
+	254:
+	//Manual Mode
+	//Just don't do anything until the user exits manual mode
+		GVL.sAlarmText:='MANUAL MODE ACTIVE';
+		IF GVL.manualMode=FALSE THEN
+			GVL.iState:=2;
+		END_IF
+	
+END_CASE
+
+
+
+	
+]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="906" Count="1" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="1059" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="54" Count="1" />
+      <LineId Id="1060" Count="0" />
+      <LineId Id="1017" Count="7" />
+      <LineId Id="870" Count="0" />
+      <LineId Id="859" Count="0" />
+      <LineId Id="915" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="1088" Count="0" />
+      <LineId Id="612" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="817" Count="0" />
+      <LineId Id="773" Count="0" />
+      <LineId Id="688" Count="0" />
+      <LineId Id="977" Count="0" />
+      <LineId Id="989" Count="0" />
+      <LineId Id="976" Count="0" />
+      <LineId Id="449" Count="0" />
+      <LineId Id="448" Count="0" />
+      <LineId Id="455" Count="0" />
+      <LineId Id="1116" Count="0" />
+      <LineId Id="456" Count="0" />
+      <LineId Id="987" Count="0" />
+      <LineId Id="1016" Count="0" />
+      <LineId Id="453" Count="0" />
+      <LineId Id="460" Count="0" />
+      <LineId Id="459" Count="0" />
+      <LineId Id="577" Count="0" />
+      <LineId Id="916" Count="0" />
+      <LineId Id="576" Count="0" />
+      <LineId Id="578" Count="0" />
+      <LineId Id="581" Count="0" />
+      <LineId Id="847" Count="0" />
+      <LineId Id="903" Count="0" />
+      <LineId Id="905" Count="0" />
+      <LineId Id="918" Count="0" />
+      <LineId Id="902" Count="0" />
+      <LineId Id="848" Count="1" />
+      <LineId Id="593" Count="0" />
+      <LineId Id="588" Count="0" />
+      <LineId Id="619" Count="0" />
+      <LineId Id="677" Count="1" />
+      <LineId Id="716" Count="0" />
+      <LineId Id="680" Count="0" />
+      <LineId Id="846" Count="0" />
+      <LineId Id="681" Count="0" />
+      <LineId Id="684" Count="0" />
+      <LineId Id="686" Count="0" />
+      <LineId Id="685" Count="0" />
+      <LineId Id="620" Count="0" />
+      <LineId Id="590" Count="0" />
+      <LineId Id="583" Count="0" />
+      <LineId Id="740" Count="2" />
+      <LineId Id="586" Count="0" />
+      <LineId Id="585" Count="0" />
+      <LineId Id="647" Count="0" />
+      <LineId Id="950" Count="0" />
+      <LineId Id="715" Count="0" />
+      <LineId Id="584" Count="0" />
+      <LineId Id="717" Count="0" />
+      <LineId Id="652" Count="0" />
+      <LineId Id="845" Count="0" />
+      <LineId Id="653" Count="0" />
+      <LineId Id="651" Count="0" />
+      <LineId Id="919" Count="0" />
+      <LineId Id="600" Count="0" />
+      <LineId Id="606" Count="0" />
+      <LineId Id="599" Count="0" />
+      <LineId Id="607" Count="1" />
+      <LineId Id="604" Count="0" />
+      <LineId Id="796" Count="1" />
+      <LineId Id="814" Count="0" />
+      <LineId Id="605" Count="0" />
+      <LineId Id="949" Count="0" />
+      <LineId Id="813" Count="0" />
+      <LineId Id="798" Count="0" />
+      <LineId Id="802" Count="1" />
+      <LineId Id="842" Count="0" />
+      <LineId Id="804" Count="3" />
+      <LineId Id="815" Count="0" />
+      <LineId Id="843" Count="0" />
+      <LineId Id="808" Count="2" />
+      <LineId Id="816" Count="0" />
+      <LineId Id="844" Count="0" />
+      <LineId Id="811" Count="0" />
+      <LineId Id="801" Count="0" />
+      <LineId Id="799" Count="0" />
+      <LineId Id="743" Count="6" />
+      <LineId Id="582" Count="0" />
+      <LineId Id="579" Count="0" />
+      <LineId Id="150" Count="0" />
+      <LineId Id="205" Count="0" />
+      <LineId Id="546" Count="0" />
+      <LineId Id="541" Count="0" />
+      <LineId Id="543" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

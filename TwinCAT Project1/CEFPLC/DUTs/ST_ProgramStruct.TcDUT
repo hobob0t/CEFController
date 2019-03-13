@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <DUT Name="ST_ProgramStruct" Id="{2d361843-61c1-4fd2-86d3-088098bba61d}">
+    <Declaration><![CDATA[{attribute 'enable_dynamic_creation'}
+TYPE ST_ProgramStruct :
+STRUCT
+	ID: LINT;
+	name: STRING(255);
+	ProgramID: LINT;
+	iTime: LINT;
+	Temperature: LREAL;
+	humidity: LREAL;
+	Light1: INT;
+	Light2: INT;
+	AnalogAux1: LINT;
+	AnalogAux2: LINT;
+	AnalogAux3: LINT;
+	AnalogAux4: LINT;
+	DigitalAux1: BOOL;
+	DigitalAux2: BOOL;
+	DigitalAux3: BOOL;
+	DigitalAux4: BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

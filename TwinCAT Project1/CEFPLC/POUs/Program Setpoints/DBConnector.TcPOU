@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+  <POU Name="DBConnector" Id="{949688ca-339c-4ee0-829c-86681fd8e660}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM DBConnector
+
+
+VAR_OUTPUT
+
+	sSeverity: WSTRING(255);
+	bError :BOOL;
+
+END_VAR
+VAR
+
+	fbSQLDatabase: FB_SQLDatabase(sNetID:='', tTimeout:=T#10S);
+	result: I_TcResultEvent;
+	iState: INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+//State machine
+CASE iState OF
+
+//Connect
+0:
+	IF fbSqlDatabase.Connect(1) THEN
+		IF fbSqlDatabase.bError THEN
+			iState := 255;
+			result := fbSqlDatabase.ipTcResultEvent;
+			sSeverity := result.Text;
+			bError := TRUE; 		
+		ELSE
+			iState := 1;
+		END_IF
+	END_IF
+1:
+//Make sure it's still connected
+	IF fbSqlDatabase.bConnected THEN
+		result := fbSqlDatabase.ipTcResultEvent;
+		sSeverity := result.Text;
+		bError := fbSqlDatabase.bError;		
+	ELSE
+		iState := 255;
+		result := fbSqlDatabase.ipTcResultEvent;
+		sSeverity := result.Text;
+		bError := fbSqlDatabase.bError;
+	END_IF
+
+255:
+//Error handling
+	//ADSLOGSTR(msgCtrlMask := ADSLOG_MSGTYPE_ERROR OR ADSLOG_MSGTYPE_MSGBOX, msgFmtStr := 'Oh god what have you done? %s', strArg := WSTRING_TO_STRING(result.Text));
+	IF fbSqlDatabase.Disconnect() THEN
+			
+			iState := 0;
+			result := fbSqlDatabase.ipTcResultEvent;
+			sSeverity := result.Text;
+			bError := fbSqlDatabase.bError;
+	
+	END_IF
+ 	
+END_CASE]]></ST>
+    </Implementation>
+    <LineIds Name="DBConnector">
+      <LineId Id="173" Count="2" />
+      <LineId Id="185" Count="9" />
+      <LineId Id="197" Count="17" />
+      <LineId Id="240" Count="0" />
+      <LineId Id="215" Count="5" />
+      <LineId Id="222" Count="2" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+  <POU Name="Scheduler" Id="{b0f02b92-63b2-4e9e-8b79-865f55f61e6b}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM Scheduler
+VAR_INPUT
+	resetSchedule:BOOL:=TRUE;
+END_VAR
+VAR
+	
+	
+	
+	ScheduleLine:ST_ScheduleStruct;
+	sqlResult:WSTRING(255);
+	bError:BOOL;
+	iLines:UDINT;
+	iState:INT;
+
+	lastDate: TIMESTRUCT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+//Run all these programs to get the next line, first line, and current line in the schedule using database queries
+fbGetNextScheduleLine();
+fbGetCurrentScheduleLine();
+fbGetFirstScheduleLine();
+fbGetCurrentProgramName();
+GVL.CurrentProgramName:=fbGetCurrentProgramName.arrRecords.Name;
+
+CASE iState OF
+
+0:
+iState:=1;
+//IDLE...nothing here yet
+
+	
+1:
+	//If we want to reset the schedule to the beginning
+	IF resetSchedule=TRUE THEN
+		
+		
+		IF fbGetFirstScheduleLine.sSeverity="No Error" THEN //If there is no error when we try and get the first line in the schedule
+			GVL.CurrentProgram:=fbGetFirstScheduleLine.arrRecords.ProgramID;
+			//We need to initialize the next program to something. So we just set it to the current program
+			GVL.NextProgram:=fbGetFirstScheduleLine.arrRecords.ProgramID;
+			//The sequence is an integer that determines the order to run the programs. 1->2-->3 etc
+			//This is set by the user in the interface. Here we just read the value
+			GVL.ScheduleSequence:=fbGetFirstScheduleLine.arrRecords.Sequence;
+			
+			//OK we reset the schedule, set that to false now
+			resetSchedule:=FALSE;
+			
+			//Timestamp when it happened so we know when a full day has passed
+			lastDate := GVL.fbLocalSystemTime.systemTime;
+		END_IF
+	ELSIF resetSchedule=FALSE THEN
+		//Check for the current and next programs in the schedule
+		
+		//While running, check to see if the schedule has changed
+		//If the schedule has changed, then change the program to match
+		IF fbGetCurrentScheduleLine.arrRecords.ProgramID<>GVL.CurrentProgram AND fbGetCurrentScheduleLine.sSeverity="No Error" AND fbGetCurrentScheduleLine.iLines<>0	THEN
+			GVL.CurrentProgram:=fbGetCurrentScheduleLine.arrRecords.ProgramID;
+		
+		END_IF
+		//Also get the next program
+		IF fbGetNextScheduleLine.sSeverity="No Error" AND fbGetNextScheduleLine.iLines>0 THEN
+			GVL.NextProgram:=fbGetNextScheduleLine.arrRecords.ProgramID;
+		//If there are no more programs in the schedule, the next program will be the first program.
+		ELSIF fbGetNextScheduleLine.sSeverity="No Error" AND fbGetNextScheduleLine.iLines=0 THEN
+			GVL.NextProgram:=fbGetFirstScheduleLine.arrRecords.ProgramID;
+		END_IF
+		
+		//Check if a date change has occured. 
+		//We assume time always goes forward. But if the user changes the system date for some reason, this could get weird.
+		IF GVL.fbLocalSystemTime.systemTime.wDay<>lastDate.wDay THEN
+			//Does the next program exist? or have we reached the end of the schedule?
+			IF fbGetnextScheduleLine.iLines >0 AND fbGetnextScheduleLine.sSeverity="No Error" THEN
+				GVL.CurrentProgram := fbGetnextScheduleLine.arrRecords.ProgramID;
+				GVL.ScheduleSequence := fbGetnextScheduleLine.arrRecords.Sequence;
+				lastDate := GVL.fbLocalSystemTime.systemTime;
+			ELSIF fbGetnextScheduleLine.iLines=0 AND fbGetnextScheduleLine.sSeverity="No Error" THEN
+				resetSchedule:=TRUE;
+				lastDate := GVL.fbLocalSystemTime.systemTime;
+			END_IF
+			
+		END_IF
+		
+		
+		
+		
+	END_IF
+
+
+END_CASE]]></ST>
+    </Implementation>
+    <LineIds Name="Scheduler">
+      <LineId Id="270" Count="1" />
+      <LineId Id="179" Count="1" />
+      <LineId Id="182" Count="0" />
+      <LineId Id="217" Count="0" />
+      <LineId Id="186" Count="1" />
+      <LineId Id="181" Count="0" />
+      <LineId Id="113" Count="1" />
+      <LineId Id="202" Count="0" />
+      <LineId Id="201" Count="0" />
+      <LineId Id="203" Count="0" />
+      <LineId Id="183" Count="0" />
+      <LineId Id="185" Count="0" />
+      <LineId Id="184" Count="0" />
+      <LineId Id="94" Count="1" />
+      <LineId Id="97" Count="2" />
+      <LineId Id="274" Count="0" />
+      <LineId Id="253" Count="0" />
+      <LineId Id="275" Count="0" />
+      <LineId Id="277" Count="0" />
+      <LineId Id="100" Count="0" />
+      <LineId Id="177" Count="0" />
+      <LineId Id="278" Count="0" />
+      <LineId Id="111" Count="0" />
+      <LineId Id="279" Count="1" />
+      <LineId Id="153" Count="0" />
+      <LineId Id="101" Count="0" />
+      <LineId Id="93" Count="0" />
+      <LineId Id="108" Count="0" />
+      <LineId Id="167" Count="0" />
+      <LineId Id="147" Count="0" />
+      <LineId Id="116" Count="0" />
+      <LineId Id="106" Count="0" />
+      <LineId Id="109" Count="0" />
+      <LineId Id="236" Count="0" />
+      <LineId Id="234" Count="0" />
+      <LineId Id="169" Count="0" />
+      <LineId Id="171" Count="0" />
+      <LineId Id="174" Count="0" />
+      <LineId Id="176" Count="0" />
+      <LineId Id="175" Count="0" />
+      <LineId Id="172" Count="1" />
+      <LineId Id="144" Count="0" />
+      <LineId Id="149" Count="0" />
+      <LineId Id="281" Count="0" />
+      <LineId Id="152" Count="0" />
+      <LineId Id="159" Count="0" />
+      <LineId Id="158" Count="0" />
+      <LineId Id="160" Count="0" />
+      <LineId Id="162" Count="0" />
+      <LineId Id="166" Count="0" />
+      <LineId Id="161" Count="0" />
+      <LineId Id="163" Count="2" />
+      <LineId Id="156" Count="1" />
+      <LineId Id="151" Count="0" />
+      <LineId Id="145" Count="1" />
+      <LineId Id="107" Count="0" />
+      <LineId Id="105" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="7" Count="1" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

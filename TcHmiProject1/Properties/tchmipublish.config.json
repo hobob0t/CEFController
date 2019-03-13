@@ -1,0 +1,28 @@
+﻿[
+  {
+    "isNew": false,
+    "profileName": "CEF_HMI",
+    "publishMode": "TcHmi",
+    "targetDirectory": "",
+    "server": "",
+    "sitePath": "",
+    "destinationUrl": "",
+    "passiveMode": true,
+    "savePassword": true,
+    "deleteAllFilesBeforePublish": false,
+    "deleteExtensionDataBeforePublish": false,
+    "abortOnErrors": true,
+    "userName": "",
+    "encryptedPassword": "",
+    "tcHmiServerHost": "169.237.198.96",
+    "tcHmiServerPort": "1020",
+    "socketTimeout": "45",
+    "tcHmiUseTLS": true,
+    "tcHmiServerUserName": "__SystemAdministrator",
+    "encryptedTcHmiServerPassword": "c/DsNqe+PL+44einzP6Fvg==",
+    "tcHmiDestinationUrl": "https://169.237.198.96:1020",
+    "publishConfiguration": "remote",
+    "tcHmiSavePassword": true,
+    "tcHmiIgnoreCertificateErrors": true
+  }
+]

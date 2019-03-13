@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+  <POU Name="fbGetCurrentProgramName" Id="{2d11c1a9-79dd-4b5e-80be-2f07715072f1}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM fbGetCurrentProgramName
+
+VAR_OUTPUT
+	arrRecords: ST_ProgramListStruct;
+	sSeverity: WSTRING(255);
+	bError :BOOL;
+
+	iLines: UDINT;
+END_VAR
+VAR
+	STProgram: ST_ProgramStruct;
+	now : TIMESTRUCT;
+	nowMinutes : LINT;
+	
+	previousMinute: LINT;
+	
+	fbTON: TON := (PT := TIME#10S0MS);
+
+	
+
+	
+	fbPLCDBRead : FB_PLCDBRead(sNetID:='',tTimeout:=T#5S);
+	fbSqlCommand : FB_SQLCommand(sNetID := '', tTimeout := T#5S);
+	
+	
+	intTime: DINT;
+	todTime: TOD;
+
+	sCmd: STRING(255):='SELECT * FROM [Schedule] ORDER BY [Sequence] ASC';
+
+	dIntSqlResult: DINT;
+	fbSQLDatabase: FB_SQLDatabase(sNetID:='', tTimeout:=T#10S);
+	fbSQLResult: FB_SQLResult(sNetID:='', tTimeout:=T#10S);
+	result: I_TcResultEvent;
+
+
+	iState: INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//Build command
+
+
+
+sCmd :=CONCAT('SELECT * FROM [ProgramList] WHERE [ID]=',LINT_TO_STRING(GVL.CurrentProgram));
+
+//State machine
+CASE iState OF
+0:
+//IDLE
+fbTON(PT := TIME#2S0MS);
+IF fbTON.Q=TRUE THEN
+	iState:=1;
+	fbTON.IN:=FALSE;
+	bError := FALSE; 
+ELSE
+	fbTON.IN:=TRUE;
+END_IF
+//Connect
+1:
+	IF fbSqlDatabase.Connect(1) THEN
+		IF fbSqlDatabase.bError THEN
+			iState := 255;
+			result := fbSqlDatabase.ipTcResultEvent;
+			sSeverity := result.Text;
+			bError := TRUE; 		
+		ELSE
+			//If sucessful, point the connection to the sql command function
+			fbSqlDatabase.CreateCmd(ADR(fbSqlCommand));
+			iState := 2;
+		END_IF
+	END_IF
+2:
+//Send the sql command
+	IF fbSQLCommand.ExecuteDataReturn(ADR(sCmd), SIZEOF(sCmd), ADR(fbSqlResult)) THEN
+		IF fbSQLCommand.bError THEN
+			iState := 255;
+			result := fbSQLCommand.ipTcResultEvent;
+			sSeverity := result.Text;
+			bError := TRUE;
+		ELSE
+			iState := 3; 
+			iLines:=fbSqlResult.nDataCount;
+		END_IF
+	END_IF
+		
+3:
+//Read the sql result
+	IF fbSqlResult.Read(0, 1, ADR(arrRecords), SIZEOF(arrRecords), TRUE, TRUE) THEN
+		IF fbSqlResult.bError THEN
+			result := fbSqlResult.ipTcResultEvent;
+			sSeverity := result.Text;
+			iState:=255;
+			bError := TRUE;
+		ELSE 
+			iState:=4;
+			
+			result := fbSqlResult.ipTcResultEvent;
+			sSeverity := result.Text;
+		END_IF
+	
+
+	END_IF
+4:
+	IF 	fbSqlDatabase.Disconnect() THEN
+		bError := FALSE;
+		iState:=0;
+	END_IF
+255:
+	IF 	fbSqlDatabase.Disconnect() THEN
+		iState:=0;	
+		bError := TRUE;
+		result := fbSqlResult.ipTcResultEvent;
+		sSeverity := result.Text;
+
+	END_IF
+	
+END_CASE]]></ST>
+    </Implementation>
+    <LineIds Name="fbGetCurrentProgramName">
+      <LineId Id="476" Count="0" />
+      <LineId Id="474" Count="0" />
+      <LineId Id="478" Count="2" />
+      <LineId Id="486" Count="0" />
+      <LineId Id="61" Count="2" />
+      <LineId Id="300" Count="0" />
+      <LineId Id="409" Count="3" />
+      <LineId Id="415" Count="0" />
+      <LineId Id="413" Count="1" />
+      <LineId Id="408" Count="0" />
+      <LineId Id="64" Count="3" />
+      <LineId Id="155" Count="0" />
+      <LineId Id="157" Count="0" />
+      <LineId Id="156" Count="0" />
+      <LineId Id="168" Count="0" />
+      <LineId Id="69" Count="12" />
+      <LineId Id="167" Count="0" />
+      <LineId Id="82" Count="0" />
+      <LineId Id="319" Count="0" />
+      <LineId Id="525" Count="0" />
+      <LineId Id="84" Count="5" />
+      <LineId Id="153" Count="0" />
+      <LineId Id="323" Count="2" />
+      <LineId Id="321" Count="1" />
+      <LineId Id="90" Count="0" />
+      <LineId Id="364" Count="0" />
+      <LineId Id="310" Count="0" />
+      <LineId Id="320" Count="0" />
+      <LineId Id="326" Count="0" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="165" Count="0" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="312" Count="2" />
+      <LineId Id="316" Count="0" />
+      <LineId Id="315" Count="0" />
+      <LineId Id="96" Count="0" />
+      <LineId Id="307" Count="0" />
+      <LineId Id="98" Count="0" />
+      <LineId Id="169" Count="0" />
+      <LineId Id="171" Count="1" />
+      <LineId Id="403" Count="1" />
+      <LineId Id="101" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+  <GVL Name="GVL" Id="{7fea8047-73a9-41a8-bfee-b4190fb1389e}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	
+
+	TempControl: LREAL;
+	iTempControl AT %Q*:INT;
+	cycleTime: LREAL;
+	
+	tempSensor AT %I*: INT; 
+	
+	Temp: LREAL;
+	Humidity:LREAL;
+
+	
+	reset: BOOL;
+
+	fbLocalSystemTime:FB_LocalSystemTime;
+
+	programURL: STRING(255);
+	graphURL:STRING(255);
+		
+	manualMode:BOOL;
+	bActiveAlarm:BOOL;
+	bCriticalAlarm:BOOL;
+	sAlarmText:STRING(255);
+	sInfoText:STRING(255);
+	
+	
+	
+END_VAR
+
+VAR_GLOBAL PERSISTENT
+	Kp : LREAL := 1500;
+	Ki : LREAL := 180;
+	Kd : LREAL := 0;
+	Kv : LREAL := 90;
+	
+	CurrentProgram: LINT;
+	CurrentProgramName:STRING(255);
+	NextProgram: LINT;
+	FirstProgram:LINT;
+	ScheduleSequence:LINT;
+
+	TempAlarmHigh:LREAL:=50;
+	TempAlarmLow:LREAL:=4;
+	
+	//Don't change this without also changing
+	//iMax in AlarmLogger
+	aAlarms:ARRAY[0..15] OF ST_ChamberAlarm;
+	
+	okToRun:BOOL;
+	iState:INT;
+	HMIPowerButton:BOOL;
+	
+	//Setpoint variable declariations
+	Light1Max:INT:=2; //Max light level
+	Light1Level:INT; //Current light level
+	Light1Percent:REAL; //Current light level in percent of max
+	Light1Stepmode:BOOL;
+	
+	Light2Max:INT:=2; //Max light level
+	Light2Level:INT; //Current light level
+	Light2Percent:REAL; //Current light level in percent of max
+	Light2Stepmode:BOOL;
+	
+	TempSetpoint: LREAL;
+	TempStepmode: BOOL;
+	
+	HumiditySetpoint:LREAL;
+	HumidityStepmode:BOOL;
+	
+END_VAR
+
+
+
+
+]]></Declaration>
+  </GVL>
+</TcPlcObject>

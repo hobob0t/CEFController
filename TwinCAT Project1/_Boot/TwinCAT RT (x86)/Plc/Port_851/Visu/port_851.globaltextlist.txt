@@ -1,0 +1,93 @@
+Id;Default
+91;%.0f
+893;%.1f
+356;%.2f
+421;%0.2f
+270;%1.0f
+572;%10.0f
+269;%2.0f
+886;%2.1f
+319;%2.2f
+87;%2.5f
+451;%2f
+727;%3.2f
+238;%f
+145;%f2
+372;%i
+312;%s
+901;$'Help$'
+308;32767
+806;<-Cooling  Heating->
+489;Acknowledg Alarms
+758;acknowledge 
+580;Acknowledge $R$NAlarms
+468;Acknowledge Alarms
+675;Admin
+188;Alarm Note
+598;Alarms
+142;Back
+597;Co2
+427;Compressor Pressure Sensor
+90;Contactor
+384;Cooling                         Heating
+366;Cooling           Heating
+274;CoSensor
+982;Current Program
+902;Date & Time
+33;Enable
+589;Flourescent Lights
+968;Fluorescent Lights
+883;Graph
+262;Help
+511;High Temperature Limit
+880;Home
+265;Hum
+214;Humidity
+491;ID
+472;In ramp mode, this is the $R$Ndeviation from the setpoint$R$N$R$NIn step mode, these are absolute values
+260;In ramp mode, this is the deviation from $R$Nthe setpoint$R$N$R$NIn step mode, these are absolute values
+349;In ramp mode, this is the deviation from the setpoint$R$N$R$NIn step mode, these are absolute values
+290;In RAMP mode: This is the maximum deivation from the setpoint$R$N$R$N
+469;Incandescent Lights
+819;IO
+219;Kd
+866;Ki
+268;Kp
+121;Kv
+405;Level 1 Light
+205;Level 2 Light
+908;Light Level 1
+486;Light Level 2
+231;Log In
+921;Log Out
+157;Low Temperature Limit
+658;Manual Mode
+973;Manual Mode Only Available When Program  Is Not Running
+682;Name
+891;None
+117;Open Graph
+337;Operator
+914;PID Constants
+72;PID Equation Ref.
+757;Programs
+972;Ramp
+71;Ramping Multiplier
+346;Schedule Sequence
+424;Service
+316;Setpoint
+541;Settings
+865;Start/Stop
+457;Step
+952;Td
+360;Temp
+833;Temperature
+70;Time
+180;Tn
+226;Tv
+815;Users
+38;Valve Control $R$N(Integer 0-32767)
+493;Valve Control (Integer 0-32767)
+690;Valve Control Output
+189;Valve Control32767
+561;Valve State
+282;ytes

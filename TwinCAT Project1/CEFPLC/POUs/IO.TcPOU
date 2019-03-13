@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+  <POU Name="IO" Id="{1ce9b422-5f87-4557-abb2-cabcfdf99a7f}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM IO
+VAR
+
+
+	Scaled_control: LREAL;
+	fbScaleValue:scaleValue;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+	
+
+GVL.Temp := INT_TO_LREAL(GVL.tempSensor)/10;
+GVL.Humidity := INT_TO_LREAL(IO_VARS.HUM_SENS)/163.835;
+
+
+IF GVL.manualMode=FALSE THEN
+	
+	
+IF GVL.Light1Level=0 THEN
+	IO_VARS.L1:=0;
+	IO_VARS.L2:=0;
+ELSIF  GVL.Light1Level=1 THEN
+	IO_VARS.L1:=1;
+	IO_VARS.L2:=0;
+ELSIF  GVL.Light1Level=2 THEN
+	IO_VARS.L1:=1;
+	IO_VARS.L2:=1;
+END_IF
+	
+	
+	
+//Scale temp signal for analog out
+//This is unique for compressor units with 3-way magnetic valves
+Scaled_control:=0.5*GVL.TempControl+13107;
+IF Scaled_control>=32767 THEN
+	Scaled_control :=32767;
+ELSIF Scaled_control <=0 THEN
+	Scaled_control :=0;
+ELSE
+	Scaled_control:=Scaled_control;
+END_IF
+GVL.iTempControl := LREAL_TO_INT(Scaled_control);
+
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="IO">
+      <LineId Id="6" Count="0" />
+      <LineId Id="82" Count="1" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="86" Count="3" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="54" Count="8" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="45" Count="2" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="66" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="36" Count="6" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="84" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

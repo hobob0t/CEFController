@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <DUT Name="ST_ScheduleStruct" Id="{8b2b4f42-37b7-4528-8df3-721bccff635d}">
+    <Declaration><![CDATA[TYPE ST_ScheduleStruct :
+STRUCT
+	ID: LINT;
+	Sequence: LINT;
+	ProgramID: LINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

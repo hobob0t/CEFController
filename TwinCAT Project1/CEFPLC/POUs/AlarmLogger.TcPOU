@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+  <POU Name="AlarmLogger" Id="{f9349e5e-952a-4c39-92af-9f961481e0a9}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM AlarmLogger
+VAR
+	iCounter:DINT;
+	iMax:DINT;
+	alarmTrigger: R_TRIG; 
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[alarmTrigger(CLK := GVL.bCriticalAlarm);
+
+IF alarmTrigger.Q THEN
+	//Shift the whole array by 1 so we can enter the new alarm in the first element
+	iCounter:=0;
+	
+	//Max number of alarms
+	//Depends on the array size of GVL.aAlarms
+	iMax:=15;
+	
+	FOR iCounter:=iMax TO 0 BY -1 DO //Notice we're counting backwards so the last element goes away, and the first element is now empty
+		
+		IF iCounter<>iMax THEN
+			GVL.aAlarms[iCounter+1]:=GVL.aAlarms[iCounter];
+		END_IF	
+
+	END_FOR
+
+	GVL.aAlarms[0].sAlarmText:=GVL.sAlarmText;
+	GVL.aAlarms[0].dtTime:=SYSTEMTIME_TO_STRING(GVL.fbLocalSystemTime.systemTime);
+	
+	GVL.bActiveAlarm:=TRUE; //An alarm is now active and will remain that way until the user acknowledges it
+
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="AlarmLogger">
+      <LineId Id="12" Count="1" />
+      <LineId Id="15" Count="1" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="56" Count="2" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="40" Count="1" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="51" Count="1" />
+      <LineId Id="61" Count="1" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="11" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

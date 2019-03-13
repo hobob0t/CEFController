@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+  <POU Name="HumidityPID" Id="{a8c07c7d-f9f1-49d5-818f-a19bd745ddbc}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM HumidityPID
+VAR
+	
+	PID: FB_BasicPID;
+	bReset: BOOL;
+	
+	AH: LREAL;
+	AHSetpoint: LREAL;
+	
+	//Constants for air as an ideal gas to calculate absolute humidity in g/m^3
+	Tn:LREAL:=240.7263;
+	m:LREAL:=7.591386;
+	A:LREAL:=6.116441;
+END_VAR
+
+VAR_OUTPUT
+	output: LREAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//Convert realative humidity to absolute humidity
+AH:= A*EXPT	(10,m*GVL.Temp/(GVL.Temp+Tn))*(GVL.Humidity/100)*100*2.16679/(273.15+GVL.Temp);
+AHSetpoint:= A*EXPT(10,m*GVL.TempSetpoint/(GVL.TempSetpoint+Tn))*(GVL.HumiditySetpoint/100)*100*2.16679/(273.15+GVL.TempSetpoint);
+
+//Run pid loop
+PID(
+	fSetpointValue:=AHSetpoint,
+	fActualValue:=AH, 
+	bReset:=bReset, 
+	fCtrlCycleTime:=1, 
+	fKp:=1, 
+	fTn:=1, 
+	fTv:=1, 
+	fTd:=0, 
+	fCtrlOutput=>output);
+	
+	
+//Since there's no dehumidification on this chamber
+//Just reset the PID back to 0 if the output is negative
+IF output<0 THEN
+	output:=0;
+	bReset:=TRUE;
+ELSIF GVL.reset =  TRUE THEN
+	bReset:=TRUE;
+ELSE
+	bReset:=FALSE;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="HumidityPID">
+      <LineId Id="70" Count="0" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="100" Count="0" />
+      <LineId Id="60" Count="0" />
+      <LineId Id="9" Count="9" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="54" Count="2" />
+      <LineId Id="31" Count="1" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="50" Count="1" />
+      <LineId Id="49" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <POU Name="scaleValue" Id="{56cf4de0-2487-416e-a10e-85933b24d267}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK scaleValue
+VAR_INPUT
+	rInputPercent:REAL;
+	rMaxValue:REAL;
+
+END_VAR
+VAR_OUTPUT
+	
+	iScaled:INT;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[iScaled:=REAL_TO_INT(rInputPercent*rMaxValue/100);]]></ST>
+    </Implementation>
+    <LineIds Name="scaleValue">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

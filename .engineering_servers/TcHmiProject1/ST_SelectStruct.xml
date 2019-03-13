@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0200">
+  <fileHeader companyName="Beckhoff Automation GmbH" productName="TF6420 Database Server Query Analyser" productVersion="1.0.0.0" creationDateTime="2018-10-18T13:42:14" />
+  <contentHeader name="Untitled1" modificationDateTime="2018-10-18T13:42:14">
+    <coordinateInfo>
+      <fbd>
+        <scaling x="1" y="1" />
+      </fbd>
+      <ld>
+        <scaling x="1" y="1" />
+      </ld>
+      <sfc>
+        <scaling x="1" y="1" />
+      </sfc>
+    </coordinateInfo>
+    <addData>
+      <data name="http://www.3s-software.com/plcopenxml/projectinformation" handleUnknown="implementation">
+        <ProjectInformation />
+      </data>
+    </addData>
+  </contentHeader>
+  <types>
+    <dataTypes>
+      <dataType name="ST_SelectStruct">
+        <baseType>
+          <struct>
+            <variable name="time">
+              <type>
+                <LINT />
+              </type>
+            </variable>
+            <variable name="Temperature">
+              <type>
+                <LREAL />
+              </type>
+            </variable>
+            <variable name="ID">
+              <type>
+                <LINT />
+              </type>
+            </variable>
+            <variable name="name">
+              <type>
+                <string length="255" />
+              </type>
+            </variable>
+            <variable name="humidity">
+              <type>
+                <LREAL />
+              </type>
+            </variable>
+            <variable name="CO2">
+              <type>
+                <LREAL />
+              </type>
+            </variable>
+            <variable name="Light1">
+              <type>
+                <INT />
+              </type>
+            </variable>
+            <variable name="Light2">
+              <type>
+                <INT />
+              </type>
+            </variable>
+            <variable name="Light3">
+              <type>
+                <INT />
+              </type>
+            </variable>
+            <variable name="Light4">
+              <type>
+                <INT />
+              </type>
+            </variable>
+            <variable name="AnalogAux1">
+              <type>
+                <LINT />
+              </type>
+            </variable>
+            <variable name="AnalogAux2">
+              <type>
+                <LINT />
+              </type>
+            </variable>
+            <variable name="AnalogAux3">
+              <type>
+                <LINT />
+              </type>
+            </variable>
+            <variable name="AnalogAux4">
+              <type>
+                <LINT />
+              </type>
+            </variable>
+            <variable name="DigitalAux1">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="DigitalAux2">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="DigitalAux3">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="DigitalAux4">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+          </struct>
+        </baseType>
+        <addData />
+      </dataType>
+    </dataTypes>
+    <pous />
+  </types>
+  <instances>
+    <configurations />
+  </instances>
+  <addData>
+    <data name="http://www.3s-software.com/plcopenxml/projectstructure" handleUnknown="discard">
+      <ProjectStructure>
+        <Object Name="ST_SelectStruct" />
+      </ProjectStructure>
+    </data>
+  </addData>
+</project>

@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+  <POU Name="OkToRun" Id="{31a4ced2-eb7b-4495-8b26-88a3f28b5673}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM OkToRun
+VAR
+
+	alarmTimeout: TON := (PT := TIME#11S0MS);
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[alarmTimeout();
+
+//HARD CODED UPPER AND LOWER LIMITS
+IF GVL.Temp > 50 THEN
+		GVL.bCriticalAlarm:=TRUE;
+		IO_VARS.ENABLE:=FALSE;
+		GVL.sAlarmText:='Critical High Temp Alarm';
+	END_IF
+IF GVL.Temp < 0 THEN
+	GVL.bCriticalAlarm:=TRUE;
+	IO_VARS.ENABLE:=FALSE;
+	GVL.sAlarmText:='Critical Low Temp Alarm';
+END_IF
+
+
+
+//If not in manual mode
+IF GVL.manualMode=FALSE THEN
+	
+	//If running
+	IF GVL.iState=1 THEN
+
+	
+		//Temperature Alarm Logic for STEP MODE
+		IF GVL.TempStepmode THEN
+			IF GVL.iState=1 AND GVL.Temp > (GVL.TempAlarmHigh) THEN
+				GVL.bCriticalAlarm:=TRUE;
+				GVL.sAlarmText:='High Temp Alarm';
+			END_IF
+			IF GVL.iState=1 AND GVL.Temp < (GVL.TempAlarmLow) THEN
+				GVL.bCriticalAlarm:=TRUE;
+				GVL.sAlarmText:='Low Temp Alarm';
+			END_IF
+		END_IF
+		
+		//Temperature alarm logic for RAMP MODE
+		IF GVL.TempStepmode=FALSE THEN
+			IF GVL.iState=1 AND GVL.Temp > (GVL.TempSetpoint+GVL.TempAlarmHigh) THEN
+				GVL.bCriticalAlarm:=TRUE;
+				GVL.sAlarmText:='High Temp Alarm';
+			END_IF
+			IF GVL.iState=1 AND GVL.Temp < (GVL.TempSetpoint-GVL.TempAlarmLow) THEN
+				GVL.bCriticalAlarm:=TRUE;
+				GVL.sAlarmText:='Low Temp Alarm';
+			END_IF
+		END_IF
+		
+		//Schedule Alarms
+		//If the user deletes the current program or changes the schedule in an incorrect way, 
+		//Tell them they messed up
+		//This could also happen if there are database errors
+		IF fbGetCurrentScheduleLine.sSeverity="No Error" AND fbGetCurrentScheduleLine.iLines=0 THEN
+			alarmTimeout.IN:=TRUE;
+			IF alarmTimeout.Q=TRUE THEN
+				GVL.sAlarmText:='Error getting current program. Check schedule and programs';
+				GVL.bCriticalAlarm:=TRUE;
+				alarmTimeout.IN:=FALSE;
+				
+			END_IF
+				
+		ELSE
+
+			alarmTimeout.IN:=FALSE;
+			
+		END_IF
+		//Refridgeration alarm
+(*			IF IO_VARS.PRESSURE_SENSE=FALSE AND IO_VARS.ENABLE=TRUE THEN
+			alarmTimeout.IN:=TRUE;
+			IF alarmTimeout.Q=TRUE THEN
+				GVL.sAlarmText:='Compressor Trouble Alarm';
+				GVL.bCriticalAlarm:=TRUE;
+				alarmTimeout.IN:=FALSE;
+				
+			END_IF
+				
+		ELSE
+		
+			alarmTimeout.IN:=FALSE;
+		END_IF
+		*)
+	END_IF
+	
+	
+
+END_IF	
+
+//OK TO RUN IF THERE ARE NO ERRORS
+IF GVL.bCriticalAlarm=FALSE AND GVL.HMIPowerButton=TRUE THEN
+	GVL.okToRun:=TRUE;
+	GVL.sAlarmText:='Running No Alarm';
+	IO_VARS.ENABLE:=TRUE;
+ELSIF GVL.bCriticalAlarm=FALSE AND GVL.HMIPowerButton=FALSE AND IO_VARS.ENABLE=FALSE THEN
+	GVL.sAlarmText:='Not Running No Alarm';
+ELSE
+	GVL.okToRun:=FALSE;
+	IF GVL.manualMode=FALSE THEN
+		IO_VARS.ENABLE:=FALSE;
+	END_IF
+	
+	GVL.HMIPowerButton:=FALSE;
+END_IF
+	
+	
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="OkToRun">
+      <LineId Id="99" Count="0" />
+      <LineId Id="242" Count="0" />
+      <LineId Id="234" Count="2" />
+      <LineId Id="247" Count="0" />
+      <LineId Id="237" Count="3" />
+      <LineId Id="246" Count="0" />
+      <LineId Id="241" Count="0" />
+      <LineId Id="97" Count="0" />
+      <LineId Id="244" Count="1" />
+      <LineId Id="243" Count="0" />
+      <LineId Id="175" Count="0" />
+      <LineId Id="98" Count="0" />
+      <LineId Id="160" Count="0" />
+      <LineId Id="174" Count="0" />
+      <LineId Id="161" Count="0" />
+      <LineId Id="214" Count="0" />
+      <LineId Id="173" Count="0" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="82" Count="0" />
+      <LineId Id="85" Count="6" />
+      <LineId Id="83" Count="1" />
+      <LineId Id="143" Count="0" />
+      <LineId Id="141" Count="0" />
+      <LineId Id="145" Count="8" />
+      <LineId Id="144" Count="0" />
+      <LineId Id="142" Count="0" />
+      <LineId Id="187" Count="0" />
+      <LineId Id="191" Count="1" />
+      <LineId Id="206" Count="0" />
+      <LineId Id="189" Count="0" />
+      <LineId Id="195" Count="2" />
+      <LineId Id="205" Count="0" />
+      <LineId Id="199" Count="5" />
+      <LineId Id="194" Count="0" />
+      <LineId Id="190" Count="0" />
+      <LineId Id="188" Count="0" />
+      <LineId Id="140" Count="0" />
+      <LineId Id="129" Count="4" />
+      <LineId Id="178" Count="0" />
+      <LineId Id="134" Count="5" />
+      <LineId Id="92" Count="1" />
+      <LineId Id="176" Count="0" />
+      <LineId Id="179" Count="1" />
+      <LineId Id="101" Count="0" />
+      <LineId Id="128" Count="0" />
+      <LineId Id="207" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="5" Count="1" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="47" Count="1" />
+      <LineId Id="7" Count="1" />
+      <LineId Id="254" Count="2" />
+      <LineId Id="21" Count="1" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="163" Count="2" />
+      <LineId Id="162" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

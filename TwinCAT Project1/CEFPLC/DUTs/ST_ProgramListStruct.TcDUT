@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <DUT Name="ST_ProgramListStruct" Id="{168479d3-bc29-4477-8f61-7d998dd7298f}">
+    <Declaration><![CDATA[TYPE ST_ProgramListStruct :
+STRUCT
+	ID: LINT;
+	Name: STRING(255);
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

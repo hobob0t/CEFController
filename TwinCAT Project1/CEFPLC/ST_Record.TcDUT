@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <DUT Name="ST_Record" Id="{9397a3ac-c5cf-4c81-a5c1-b5271515bd01}">
+    <Declaration><![CDATA[TYPE ST_Record :
+STRUCT
+
+    nID        : LINT;
+    dtTimestamp: DATE_AND_TIME;
+    sName      : STRING;
+    nSensor1   : LREAL;
+    nSensor2   : LREAL;
+END_STRUCT
+END_TYPE
+
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

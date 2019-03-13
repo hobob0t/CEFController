@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+  <DUT Name="ST_ChamberAlarm" Id="{21d86930-5b9c-4a7d-821f-00af54f2eaad}">
+    <Declaration><![CDATA[TYPE ST_ChamberAlarm :
+STRUCT
+	dtTime:STRING(255);
+	sAlarmText:STRING(255);
+	
+	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

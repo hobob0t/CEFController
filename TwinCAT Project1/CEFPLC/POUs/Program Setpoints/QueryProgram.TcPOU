@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+  <POU Name="QueryProgram" Id="{ab1d6f67-866b-496c-bd51-28af300b2d5e}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM QueryProgram
+VAR_INPUT
+	sColumn:STRING(255);
+END_VAR
+VAR_OUTPUT
+	arrRecords: ST_ProgramStruct;
+	previousLine:ST_ProgramStruct;
+	sSeverity: WSTRING(255);
+	bError :BOOL;
+	bEndOfProgram:BOOL;
+	iLines: UDINT;
+	bSuccess: BOOL;
+	
+	
+END_VAR
+VAR
+	STProgram: ST_ProgramStruct;
+	now : TIMESTRUCT;
+	nowMinutes : LINT;
+	fbTON: TON := ();
+	fbSQLDatabase: FB_SQLDatabase(sNetID:='', tTimeout:=T#10S);
+	fbPLCDBRead : FB_PLCDBRead(sNetID:='',tTimeout:=T#5S);
+	fbSqlCommand : FB_SQLCommand(sNetID := '', tTimeout := T#5S);
+	
+	
+	intTime: DINT;
+	todTime: TOD;
+
+	sCmd: STRING(255);
+
+	dIntSqlResult: DINT;
+	
+	fbSQLResult: FB_SQLResult(sNetID:='', tTimeout:=T#10S);
+	result: I_TcResultEvent;
+
+
+	iState: INT;
+	
+	
+	iPreviousLines: UDINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+
+
+now := GVL.fbLocalSystemTime.systemTime;
+nowMinutes := now.wHour*60+now.wMinute;
+fbSQLDatabase:=DBConnector.fbSQLDatabase;
+
+//State machine
+CASE iState OF
+0:
+//IDLE
+fbTON(PT := TIME#2S0MS);
+bSuccess:=FALSE;
+bEndOfProgram:=FALSE;
+//Build command
+
+sCmd :=CONCAT('SELECT * FROM [Programs] WHERE [ProgramNameID]=',LINT_TO_STRING(GVL.CurrentProgram));
+sCmd :=CONCAT(sCmd,' AND [time]>');
+sCmd := CONCAT(sCMD,LINT_TO_STRING(nowMinutes));
+sCmd :=CONCAT(sCmd,' AND ');
+sCmd := CONCAT(sCMD,sColumn);
+sCmd := CONCAT(sCMD,' IS NOT NULL');
+sCmd:= CONCAT(sCMD,' ORDER BY [time] ASC');
+ 
+IF fbTON.Q=TRUE THEN
+	iState:=1;
+	fbTON.IN:=FALSE;
+	bError := FALSE;
+	
+ELSE
+	fbTON.IN:=TRUE;
+END_IF
+//Connect
+1:
+
+		IF fbSqlDatabase.bError THEN
+			iState := 255;
+			result := fbSqlDatabase.ipTcResultEvent;
+			sSeverity := result.Text;
+			 		
+		ELSE
+			//If sucessful, point the connection to the sql command function
+			fbSqlDatabase.CreateCmd(ADR(fbSqlCommand));
+			iState := 2;
+		END_IF
+
+2:
+//Send the sql command
+	IF fbSQLCommand.ExecuteDataReturn(ADR(sCmd), SIZEOF(sCmd), ADR(fbSqlResult)) THEN
+		IF fbSQLCommand.bError THEN
+			iState := 255;
+			result := fbSQLCommand.ipTcResultEvent;
+			sSeverity := result.Text;
+			bError := TRUE;
+		ELSE
+			iState := 3;
+			iLines:=fbSqlResult.nDataCount; 
+		END_IF
+	END_IF
+		
+3:
+//Read the sql result
+//If there are more than 0 lines, we're good
+//If there are 0 lines we have reached the end of the program and we need to query tomorrow's program
+
+IF iLines>0 THEN
+	
+	IF fbSqlResult.Read(0, 1, ADR(arrRecords), SIZEOF(arrRecords), TRUE, TRUE) THEN
+		IF fbSqlResult.bError THEN
+			result := fbSqlResult.ipTcResultEvent;
+			sSeverity := result.Text;
+			iState:=255;
+			bError := TRUE;
+		ELSE 
+			iState:=4;
+			
+			result := fbSqlResult.ipTcResultEvent;
+			sSeverity := result.Text;
+		END_IF
+	
+
+	END_IF
+	
+ELSE
+
+bEndOfProgram:=TRUE;
+sCmd :=CONCAT('SELECT  *  FROM [Programs]  WHERE [ProgramNameID]=',LINT_TO_STRING(GVL.NextProgram));
+sCmd :=CONCAT(sCmd,' AND ');
+sCmd := CONCAT(sCMD,sColumn);
+sCmd := CONCAT(sCMD,' IS NOT NULL');
+sCmd := CONCAT(sCMD,' ORDER BY [time] ASC');
+//Go back to state 2 and redo the query
+iState:=2;
+
+END_IF
+4:
+//Now build a command and query the PREVIOUS line in the program
+sCmd := CONCAT('SELECT  *  FROM [Programs]  WHERE [ProgramNameID]=',LINT_TO_STRING(GVL.CurrentProgram));
+sCmd := CONCAT(sCmd,' AND [time] <=');
+sCmd := CONCAT(sCMD,LINT_TO_STRING(nowMinutes));
+sCmd := CONCAT(sCmd,' AND ');
+sCmd := CONCAT(sCMD,sColumn);
+sCmd := CONCAT(sCMD,' IS NOT NULL');
+sCmd := CONCAT(sCMD,' ORDER BY [time] DESC');	
+	IF fbSQLCommand.ExecuteDataReturn(ADR(sCmd), SIZEOF(sCmd), ADR(fbSqlResult)) THEN
+		IF fbSQLCommand.bError THEN
+			iState := 255;
+			result := fbSQLCommand.ipTcResultEvent;
+			sSeverity := result.Text;
+			bError := TRUE;
+		ELSE
+			iState := 5; 
+			iPreviousLines:=fbSqlResult.nDataCount;
+		END_IF
+	END_IF
+
+5:
+//read the previous line
+//If there IS a previous line then
+IF iPreviousLines>0 THEN
+ 
+	IF fbSqlResult.Read(0, 1, ADR(previousLine), SIZEOF(previousLine), TRUE, TRUE) THEN
+		IF fbSqlResult.bError THEN
+			result := fbSqlResult.ipTcResultEvent;
+			sSeverity := result.Text;
+			iState:=255;
+			bError := TRUE;
+		ELSE 
+			//We're done go back to the beginning
+			iState:=0;
+			bSuccess:=TRUE; 
+			result := fbSqlResult.ipTcResultEvent;
+			sSeverity := result.Text;
+			
+		END_IF
+	
+
+	END_IF
+	
+//If there is NO previous line...the previous line is the next line
+ELSE
+	previousLine:=arrRecords;
+	//We're done go back to the beginning
+	iState:=0;
+	bSuccess:=TRUE; 
+	result := fbSqlResult.ipTcResultEvent;
+	sSeverity := result.Text;
+END_IF
+
+
+255:
+	//Record the error....I need to change this to actually record the errors
+		ADSLOGSTR(msgCtrlMask := ADSLOG_MSGTYPE_ERROR OR ADSLOG_MSGTYPE_MSGBOX, msgFmtStr := 'Oh god what have you done? %s', strArg := WSTRING_TO_STRING(result.Text));
+		iState:=0;	
+		bError := TRUE;
+		result := fbSqlResult.ipTcResultEvent;
+		sSeverity := result.Text;
+	
+
+END_CASE]]></ST>
+    </Implementation>
+    <LineIds Name="QueryProgram">
+      <LineId Id="467" Count="0" />
+      <LineId Id="475" Count="1" />
+      <LineId Id="522" Count="0" />
+      <LineId Id="482" Count="0" />
+      <LineId Id="468" Count="0" />
+      <LineId Id="60" Count="3" />
+      <LineId Id="300" Count="0" />
+      <LineId Id="409" Count="0" />
+      <LineId Id="606" Count="0" />
+      <LineId Id="782" Count="0" />
+      <LineId Id="651" Count="0" />
+      <LineId Id="659" Count="0" />
+      <LineId Id="652" Count="5" />
+      <LineId Id="650" Count="0" />
+      <LineId Id="658" Count="0" />
+      <LineId Id="410" Count="2" />
+      <LineId Id="415" Count="0" />
+      <LineId Id="607" Count="0" />
+      <LineId Id="413" Count="1" />
+      <LineId Id="408" Count="0" />
+      <LineId Id="64" Count="3" />
+      <LineId Id="155" Count="0" />
+      <LineId Id="157" Count="0" />
+      <LineId Id="156" Count="0" />
+      <LineId Id="168" Count="0" />
+      <LineId Id="69" Count="12" />
+      <LineId Id="167" Count="0" />
+      <LineId Id="82" Count="0" />
+      <LineId Id="319" Count="0" />
+      <LineId Id="523" Count="0" />
+      <LineId Id="84" Count="4" />
+      <LineId Id="661" Count="0" />
+      <LineId Id="599" Count="0" />
+      <LineId Id="632" Count="0" />
+      <LineId Id="631" Count="0" />
+      <LineId Id="633" Count="0" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="153" Count="0" />
+      <LineId Id="323" Count="2" />
+      <LineId Id="321" Count="1" />
+      <LineId Id="90" Count="0" />
+      <LineId Id="622" Count="0" />
+      <LineId Id="310" Count="0" />
+      <LineId Id="320" Count="0" />
+      <LineId Id="620" Count="1" />
+      <LineId Id="326" Count="0" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="635" Count="1" />
+      <LineId Id="781" Count="0" />
+      <LineId Id="638" Count="0" />
+      <LineId Id="640" Count="0" />
+      <LineId Id="646" Count="0" />
+      <LineId Id="648" Count="0" />
+      <LineId Id="644" Count="0" />
+      <LineId Id="639" Count="0" />
+      <LineId Id="660" Count="0" />
+      <LineId Id="643" Count="0" />
+      <LineId Id="642" Count="0" />
+      <LineId Id="637" Count="0" />
+      <LineId Id="312" Count="0" />
+      <LineId Id="565" Count="0" />
+      <LineId Id="667" Count="0" />
+      <LineId Id="669" Count="0" />
+      <LineId Id="671" Count="0" />
+      <LineId Id="701" Count="1" />
+      <LineId Id="700" Count="0" />
+      <LineId Id="313" Count="0" />
+      <LineId Id="674" Count="7" />
+      <LineId Id="881" Count="0" />
+      <LineId Id="683" Count="0" />
+      <LineId Id="314" Count="0" />
+      <LineId Id="316" Count="0" />
+      <LineId Id="315" Count="0" />
+      <LineId Id="685" Count="0" />
+      <LineId Id="871" Count="0" />
+      <LineId Id="864" Count="0" />
+      <LineId Id="866" Count="0" />
+      <LineId Id="686" Count="6" />
+      <LineId Id="874" Count="0" />
+      <LineId Id="693" Count="3" />
+      <LineId Id="740" Count="0" />
+      <LineId Id="697" Count="2" />
+      <LineId Id="684" Count="0" />
+      <LineId Id="872" Count="1" />
+      <LineId Id="868" Count="0" />
+      <LineId Id="870" Count="0" />
+      <LineId Id="875" Count="3" />
+      <LineId Id="869" Count="0" />
+      <LineId Id="867" Count="0" />
+      <LineId Id="880" Count="0" />
+      <LineId Id="879" Count="0" />
+      <LineId Id="96" Count="0" />
+      <LineId Id="536" Count="0" />
+      <LineId Id="823" Count="0" />
+      <LineId Id="537" Count="3" />
+      <LineId Id="603" Count="0" />
+      <LineId Id="101" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

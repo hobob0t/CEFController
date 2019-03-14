@@ -50,6 +50,9 @@
     <Compile Include="POUs\AlarmLogger.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\DeleteOldData.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Humidity.TcPOU">
       <SubType>Code</SubType>
     </Compile>

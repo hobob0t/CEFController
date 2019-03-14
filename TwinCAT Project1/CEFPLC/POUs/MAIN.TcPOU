@@ -68,6 +68,7 @@ IF fbTON.Q=TRUE THEN //when the timer is true (every 1 second)
 	fbTON.IN:=FALSE; //reset the timer
 	FB_WritePersistentData(NETID:='', PORT:=851, START:=TRUE, TMOUT:=T#1S ); //Write persistent data 
 	Scheduler();//Checking/setting program schedule
+	DeleteOldData();
 ELSE
 	fbTON.IN:=TRUE; //If the timer is not true...keep timing until it is!
 END_IF
@@ -188,6 +189,7 @@ END_CASE
       <LineId Id="456" Count="0" />
       <LineId Id="987" Count="0" />
       <LineId Id="1016" Count="0" />
+      <LineId Id="1144" Count="0" />
       <LineId Id="453" Count="0" />
       <LineId Id="460" Count="0" />
       <LineId Id="459" Count="0" />

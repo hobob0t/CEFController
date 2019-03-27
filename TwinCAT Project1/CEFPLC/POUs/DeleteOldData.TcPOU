@@ -97,7 +97,6 @@ END_IF
 			bError := TRUE;
 		ELSE 
 			iState:=4;
-			
 			result := fbSqlResult.ipTcResultEvent;
 			sSeverity := result.Text;
 		END_IF
@@ -143,7 +142,6 @@ END_CASE]]></ST>
       <LineId Id="323" Count="2" />
       <LineId Id="321" Count="1" />
       <LineId Id="90" Count="0" />
-      <LineId Id="364" Count="0" />
       <LineId Id="310" Count="0" />
       <LineId Id="320" Count="0" />
       <LineId Id="326" Count="0" />

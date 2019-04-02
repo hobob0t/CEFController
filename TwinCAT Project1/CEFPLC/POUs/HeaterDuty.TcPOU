@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="HeaterDuty" Id="{6cba3ca2-de90-475d-8ad4-7f7c5dd34981}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM HeaterDuty
+VAR
+	
+	fbTON: TON; // TON TIMER.
+	
+	fbTP: TP;
+
+	pulseDuration: TIME:=TIME#2S;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//This program pulses the heaters for a certain number of seconds based on the PID output
+
+//This timer determines how often to pulse, and the max length of the pulse
+//In other words, we're making a Duty Cycle
+fbTON(PT := TIME#30S0MS);
+
+//Run the pulse timer
+fbTP();
+
+//If the output of the pulse timer is true, turn on the heater valve
+IO_VARS.HEATERS:=fbTP.Q;
+
+
+//Don't worry about negative values
+IF TempPID.HeatingOutput >=0 THEN
+	
+	//Convert the output to a time (in milliseconds)
+	pulseDuration:=LREAL_TO_TIME(TempPID.HeatingOutput);
+	
+	//Don't pulse anything shorter than 500ms.
+	//It's bad for the relay
+	IF pulseDuration<TIME#500MS THEN
+		pulseDuration:=TIME#0MS;
+	END_IF
+	
+	//If the durataion is greater than the max duration
+	//Just turn it on and leave it on
+	IF pulseDuration>fbTON.PT THEN
+		IO_VARS.HEATERS:=TRUE;
+	ELSE
+	
+		IF fbTON.Q=TRUE THEN //when the timer is true 
+			fbTP(IN:=TRUE, PT:=pulseDuration);//set the pulse length
+			fbTON.IN:=FALSE;//Reset the timer funtion
+		ELSE
+			fbTON.IN:=TRUE; //If the timer is not true...keep timing until it is!
+			fbTP.IN:=FALSE;//reset the pulse function
+		END_IF
+			
+	END_IF
+
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="HeaterDuty">
+      <LineId Id="76" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="84" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="58" Count="1" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="87" Count="1" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="36" Count="1" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="89" Count="1" />
+      <LineId Id="41" Count="1" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="16" Count="2" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="64" Count="1" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -59,6 +59,12 @@
     <Compile Include="POUs\HumidityPID.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\HeaterDuty.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\TempPID.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\IO.TcPOU">
       <SubType>Code</SubType>
     </Compile>

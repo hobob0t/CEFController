@@ -1,50 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <POU Name="IO" Id="{1ce9b422-5f87-4557-abb2-cabcfdf99a7f}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM IO
 VAR
 
 
 	Scaled_control: LREAL;
-	fbScaleValue:scaleValue;
+
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[
 	
 
-GVL.Temp := INT_TO_LREAL(GVL.tempSensor)/10;
-GVL.Humidity := INT_TO_LREAL(IO_VARS.HUM_SENS)/163.835;
+GVL.Temp := 0.010071*INT_TO_LREAL(GVL.tempSensor) - 39.996;//((INT_TO_LREAL(GVL.tempSensor)/3.2767) - 0.2424*5000)*165/5000; //Scaled for 0-5V with range -20 to 70C. See documentation for sensor
+GVL.Humidity := (INT_TO_LREAL(IO_VARS.HUM_SENS)/3.2767)*100/5000;
+
 
 
 IF GVL.manualMode=FALSE THEN
 	
-	
+////////////MAPPING METAL HALIDE LIGHTS/////////////
 IF GVL.Light1Level=0 THEN
-	IO_VARS.L1:=0;
-	IO_VARS.L2:=0;
+	IO_VARS.MH1:=0;
+	IO_VARS.MH2:=0;
+	IO_VARS.MH3:=0;
 ELSIF  GVL.Light1Level=1 THEN
-	IO_VARS.L1:=1;
-	IO_VARS.L2:=0;
+	IO_VARS.MH1:=1;
+	IO_VARS.MH2:=0;
+	IO_VARS.MH3:=0;
 ELSIF  GVL.Light1Level=2 THEN
-	IO_VARS.L1:=1;
-	IO_VARS.L2:=1;
+	IO_VARS.MH1:=1;
+	IO_VARS.MH2:=1;
+	IO_VARS.MH3:=0;
+ELSIF  GVL.Light1Level=3 THEN
+	IO_VARS.MH1:=1;
+	IO_VARS.MH2:=1;
+	IO_VARS.MH3:=1;
 END_IF
-	
-	
-	
-//Scale temp signal for analog out
-//This is unique for compressor units with 3-way magnetic valves
-Scaled_control:=0.5*GVL.TempControl+13107;
-IF Scaled_control>=32767 THEN
-	Scaled_control :=32767;
-ELSIF Scaled_control <=0 THEN
-	Scaled_control :=0;
-ELSE
-	Scaled_control:=Scaled_control;
-END_IF
-GVL.iTempControl := LREAL_TO_INT(Scaled_control);
 
+////////////MAPPING HIGH PRESSURE SODIUM LIGHTS/////////////
+IF GVL.Light2Level=0 THEN
+	IO_VARS.HPS1:=0;
+	IO_VARS.HPS2:=0;
+	IO_VARS.HPS3:=0;
+ELSIF  GVL.Light2Level=1 THEN
+	IO_VARS.HPS1:=1;
+	IO_VARS.HPS2:=0;
+	IO_VARS.HPS3:=0;
+ELSIF  GVL.Light2Level=2 THEN
+	IO_VARS.HPS1:=1;
+	IO_VARS.HPS2:=1;
+	IO_VARS.HPS3:=0;
+ELSIF  GVL.Light2Level=3 THEN
+	IO_VARS.HPS1:=1;
+	IO_VARS.HPS2:=1;
+	IO_VARS.HPS3:=1;
+END_IF
+	
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="IO">
@@ -52,18 +65,30 @@ END_IF]]></ST>
       <LineId Id="82" Count="1" />
       <LineId Id="5" Count="0" />
       <LineId Id="74" Count="0" />
+      <LineId Id="162" Count="0" />
       <LineId Id="86" Count="3" />
       <LineId Id="18" Count="0" />
-      <LineId Id="54" Count="8" />
+      <LineId Id="54" Count="2" />
+      <LineId Id="100" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="101" Count="1" />
+      <LineId Id="59" Count="1" />
+      <LineId Id="103" Count="1" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="98" Count="0" />
+      <LineId Id="105" Count="1" />
+      <LineId Id="97" Count="0" />
       <LineId Id="20" Count="0" />
-      <LineId Id="45" Count="2" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="66" Count="0" />
-      <LineId Id="34" Count="0" />
-      <LineId Id="36" Count="6" />
-      <LineId Id="10" Count="0" />
-      <LineId Id="85" Count="0" />
-      <LineId Id="84" Count="0" />
+      <LineId Id="109" Count="6" />
+      <LineId Id="127" Count="1" />
+      <LineId Id="118" Count="1" />
+      <LineId Id="129" Count="1" />
+      <LineId Id="122" Count="1" />
+      <LineId Id="131" Count="1" />
+      <LineId Id="126" Count="0" />
+      <LineId Id="108" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="152" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

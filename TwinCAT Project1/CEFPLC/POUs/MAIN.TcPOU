@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.17">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <POU Name="MAIN" Id="{663606dc-46bb-4216-84ba-d074cddeb072}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 
@@ -53,6 +53,7 @@ GVL.graphURL:=CONCAT(GVL.graphURL,':8050/graph');
 //VARIOUS PROGRAMS THAT NEED TO RUN EVERY CYCLE
 IO(); //Input/Output tasks and calculations
 Humidity();
+HeaterDuty();
 OkToRun();//Alarms
 fbTON();//Timer for some functions that we don't want to run every cycle
 restartTime();//Timer for auto restart in the event of an error. Set to 60 seconds
@@ -63,7 +64,7 @@ GVL.fbLocalSystemTime(sNetID:= '', bEnable:= TRUE, dwCycle:= 1);//Get the curren
 //VARIOUS PROGRAMS THAT DO NOT RUN EVERY CYCLE
 
 IF fbTON.Q=TRUE THEN //when the timer is true (every 1 second)
-	POU();//Run the PID
+	TempPID();//Run the PIDs
 	HumidityPID();
 	fbTON.IN:=FALSE; //reset the timer
 	FB_WritePersistentData(NETID:='', PORT:=851, START:=TRUE, TMOUT:=T#1S ); //Write persistent data 
@@ -174,6 +175,7 @@ END_CASE
       <LineId Id="915" Count="0" />
       <LineId Id="42" Count="0" />
       <LineId Id="1088" Count="0" />
+      <LineId Id="1172" Count="0" />
       <LineId Id="612" Count="0" />
       <LineId Id="9" Count="0" />
       <LineId Id="817" Count="0" />

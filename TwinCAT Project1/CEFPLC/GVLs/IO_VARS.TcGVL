@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <GVL Name="IO_VARS" Id="{5deb4137-ac2e-40b5-80c9-14b62d0f5cec}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
@@ -7,11 +7,14 @@ VAR_GLOBAL
 PRESSURE_SENSE AT %I*:BOOL;
 HUM_SENS AT %I*:INT;
 
+
 ENABLE AT %Q*:BOOL;
-L1 AT %Q*:BOOL;
-L2 AT %Q*:BOOL;
+MH1,MH2,MH3 AT %Q*:BOOL;
+HPS1,HPS2,HPS3 AT %Q*:BOOL;
+HEATERS AT %Q*:BOOL;
 
 HUMVALVE AT %Q*:BOOL;
+
 
 END_VAR]]></Declaration>
   </GVL>

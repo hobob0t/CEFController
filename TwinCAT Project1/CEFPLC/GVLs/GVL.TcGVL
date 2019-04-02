@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <GVL Name="GVL" Id="{7fea8047-73a9-41a8-bfee-b4190fb1389e}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
@@ -33,10 +33,15 @@ VAR_GLOBAL
 END_VAR
 
 VAR_GLOBAL PERSISTENT
-	Kp : LREAL := 1500;
-	Ki : LREAL := 180;
-	Kd : LREAL := 0;
-	Kv : LREAL := 90;
+	KpCooling : LREAL := -1500;
+	KiCooling : LREAL := 180;
+	KdCooling : LREAL := 0;
+	KvCooling : LREAL := 90;
+	
+	KpHeating : LREAL := 1500;
+	KiHeating : LREAL := 180;
+	KdHeating: LREAL := 0;
+	KvHeating : LREAL := 90;
 	
 	CurrentProgram: LINT;
 	CurrentProgramName:STRING(255);

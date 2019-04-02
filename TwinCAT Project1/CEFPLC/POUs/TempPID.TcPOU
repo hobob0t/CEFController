@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="TempPID" Id="{3c95c5e7-09a7-440b-8471-771a74e09587}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM TempPID
+VAR
+	
+	PIDCooling: FB_BasicPID;
+	PIDHeating: FB_BasicPID;
+	bResetCooling: BOOL;
+	bResetHeat: BOOL;
+END_VAR
+
+VAR_OUTPUT
+	CoolingOutput: LREAL;
+	HeatingOutput: LREAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+
+//Run pid loop
+PIDCooling(
+	fSetpointValue:=GVL.TempSetpoint,
+	fActualValue:=GVL.Temp, 
+	bReset:=bResetCooling, 
+	fCtrlCycleTime:=1, 
+	fKp:=GVL.KpCooling, 
+	fTn:=GVL.KiCooling, 
+	fTv:=GVL.KvCooling, 
+	fTd:=GVL.KdCooling);
+
+
+
+PIDHeating(
+	fSetpointValue:=GVL.TempSetpoint,
+	fActualValue:=GVL.Temp, 
+	bReset:=bResetHeat, 
+	fCtrlCycleTime:=1, 
+	fKp:=GVL.KpHeating, 
+	fTn:=GVL.KiHeating, 
+	fTv:=GVL.KvHeating, 
+	fTd:=GVL.KdHeating);
+	
+//Reset the PID back to 0 if the output is out of range
+IF  PIDCooling.fCtrlOutput>0 THEN
+	CoolingOutput:=0;
+	bResetCooling:=TRUE;
+ELSIF GVL.reset =  TRUE THEN
+	bResetCooling:=TRUE;
+ELSE
+	bResetCooling:=FALSE;
+END_IF
+
+//Reset the PID back to 0 if the output is out of range
+IF PIDHeating.fCtrlOutput<0 THEN
+	HeatingOutput:=0;
+	bResetHeat:=TRUE;
+ELSIF GVL.reset =  TRUE THEN
+	bResetHeat:=TRUE;
+ELSE
+	bResetHeat:=FALSE;
+END_IF
+
+IF PIDCooling.fCtrlOutput<0 THEN
+	CoolingOutput:=PIDCooling.fCtrlOutput*-105+14089; //<----important scaling function because the old staefa valves are weird. See documentation for siemens ZM-101A
+	HeatingOutput:=0;
+END_IF
+
+
+IF PIDHeating.fCtrlOutput>0 THEN
+	CoolingOutput:=0;
+	HeatingOutput:=PIDHeating.fCtrlOutput;//No need to scale the heater output. Just use PID constants
+END_IF
+
+
+//Scale temp signal for analog out to avoid overflows/negative numbers
+IF CoolingOutput>=32767 THEN
+	GVL.iTempControl :=32767;
+ELSIF CoolingOutput <=0 THEN
+	GVL.iTempControl :=0;
+ELSE
+	GVL.iTempControl := LREAL_TO_INT(CoolingOutput);
+END_IF
+
+IF HeatingOutput>=30000 THEN
+	HeatingOutput :=30000;
+ELSIF HeatingOutput <=0 THEN
+	HeatingOutput :=0;
+ELSE
+	HeatingOutput := HeatingOutput;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="TempPID">
+      <LineId Id="81" Count="0" />
+      <LineId Id="100" Count="0" />
+      <LineId Id="60" Count="0" />
+      <LineId Id="9" Count="8" />
+      <LineId Id="161" Count="0" />
+      <LineId Id="160" Count="0" />
+      <LineId Id="121" Count="0" />
+      <LineId Id="123" Count="8" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="133" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="50" Count="1" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="209" Count="0" />
+      <LineId Id="170" Count="0" />
+      <LineId Id="172" Count="6" />
+      <LineId Id="171" Count="0" />
+      <LineId Id="183" Count="2" />
+      <LineId Id="187" Count="0" />
+      <LineId Id="186" Count="0" />
+      <LineId Id="205" Count="0" />
+      <LineId Id="204" Count="0" />
+      <LineId Id="188" Count="2" />
+      <LineId Id="134" Count="0" />
+      <LineId Id="207" Count="0" />
+      <LineId Id="206" Count="0" />
+      <LineId Id="135" Count="0" />
+      <LineId Id="138" Count="6" />
+      <LineId Id="163" Count="6" />
+      <LineId Id="162" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

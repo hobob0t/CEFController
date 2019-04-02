@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <GlobalTextList Name="GlobalTextList" Id="{f62a83ae-a9db-4733-810e-db5d8f8f08ab}">
     <XmlArchive>
       <Data>
@@ -202,8 +202,18 @@ Alarms"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"859"</v>
+              <v n="TextDefault">"Heaters"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"262"</v>
               <v n="TextDefault">"Help"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"520"</v>
+              <v n="TextDefault">"High Pressure Sodium Lvl 1"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -217,6 +227,21 @@ Alarms"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"365"</v>
+              <v n="TextDefault">"HPS Lvl 1"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"766"</v>
+              <v n="TextDefault">"HPS Lvl 2"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"542"</v>
+              <v n="TextDefault">"HPS Lvl 3"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"265"</v>
               <v n="TextDefault">"Hum"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -224,6 +249,11 @@ Alarms"</v>
             <o>
               <v n="TextID">"214"</v>
               <v n="TextDefault">"Humidity"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"734"</v>
+              <v n="TextDefault">"Humidity Add"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -334,6 +364,21 @@ In step mode, these are absolute values"</v>
             <o>
               <v n="TextID">"973"</v>
               <v n="TextDefault">"Manual Mode Only Available When Program  Is Not Running"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"422"</v>
+              <v n="TextDefault">"Metal Halide Lvl 1"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"748"</v>
+              <v n="TextDefault">"Metal Halide Lvl 2"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"899"</v>
+              <v n="TextDefault">"Metal Halide Lvl 3"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <Visu Name="Settings" Id="{1b33a30b-6a18-49e6-aec2-86545f52a8b5}">
     <XmlArchive>
       <Data>
@@ -832,7 +832,7 @@
                     </o>
                     <o>
                       <v n="Id">2477733581L</v>
-                      <v n="Value">"GVL.Kp"</v>
+                      <v n="Value">"GVL.KpCooling"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
@@ -846,7 +846,7 @@
                 <v n="VisualElementIdentifier">"GenElemInst_95"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <n n="VisualElementFrameInformation" />
-                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="IInputAction[]">
+                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="InputBoxInputAction[]">
                   <v>OnMouseClick</v>
                   <a cet="InputBoxInputAction">
                     <o>
@@ -857,7 +857,7 @@
                       <v n="InputBoxDialogTitle">""</v>
                       <v n="Password">false</v>
                       <v n="UseTextOutputVariable">true</v>
-                      <v n="TextOutputVariableInitialized">false</v>
+                      <v n="TextOutputVariableInitialized">true</v>
                       <v n="OtherVarConversion">""</v>
                       <v n="Format">""</v>
                     </o>
@@ -1002,7 +1002,7 @@
                     </o>
                     <o>
                       <v n="Id">2477733581L</v>
-                      <v n="Value">"GVL.Ki"</v>
+                      <v n="Value">"GVL.KiCooling"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
@@ -1016,7 +1016,7 @@
                 <v n="VisualElementIdentifier">"GenElemInst_97"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <n n="VisualElementFrameInformation" />
-                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="IInputAction[]">
+                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="InputBoxInputAction[]">
                   <v>OnMouseClick</v>
                   <a cet="InputBoxInputAction">
                     <o>
@@ -1172,7 +1172,7 @@
                     </o>
                     <o>
                       <v n="Id">2477733581L</v>
-                      <v n="Value">"GVL.Kv"</v>
+                      <v n="Value">"GVL.KvCooling"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
@@ -1186,7 +1186,7 @@
                 <v n="VisualElementIdentifier">"GenElemInst_99"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <n n="VisualElementFrameInformation" />
-                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="IInputAction[]">
+                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="InputBoxInputAction[]">
                   <v>OnMouseClick</v>
                   <a cet="InputBoxInputAction">
                     <o>
@@ -1868,7 +1868,7 @@
                     </o>
                     <o>
                       <v n="Id">2477733581L</v>
-                      <v n="Value">"GVL.Kd"</v>
+                      <v n="Value">"GVL.KdCooling"</v>
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
@@ -1882,7 +1882,7 @@
                 <v n="VisualElementIdentifier">"GenElemInst_108"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <n n="VisualElementFrameInformation" />
-                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="IInputAction[]">
+                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="InputBoxInputAction[]">
                   <v>OnMouseClick</v>
                   <a cet="InputBoxInputAction">
                     <o>
@@ -2372,10 +2372,10 @@
               <d n="FbMethods" t="CaseInsensitiveHashtable" ckt="String" cvt="Guid">
                 <v>FB_Init</v>
                 <v>c242705a-7b68-4015-a265-93cabcaa72a0</v>
-                <v>FB_Exit</v>
-                <v>d1133984-8ec0-480e-b85a-c870d8d2526b</v>
                 <v>FB_Reinit</v>
                 <v>035d2edf-4766-49ff-b780-1d074ae75265</v>
+                <v>FB_Exit</v>
+                <v>d1133984-8ec0-480e-b85a-c870d8d2526b</v>
               </d>
               <v n="FbName">"NotImportant"</v>
               <v n="FbGuid">{8fa5d286-dddf-4049-8028-d9385b34670f}</v>
@@ -2466,8 +2466,8 @@
         <Type n="Guid">System.Guid</Type>
         <Type n="Hashtable">System.Collections.Hashtable</Type>
         <Type n="HotkeyConfiguration">{6b108d46-58af-4e41-a3f4-174d8f160cc4}</Type>
-        <Type n="IInputAction[]">_3S.CoDeSys.VisualElem.IInputAction[], VisualElem, Version=3.5.10.0, Culture=neutral, PublicKeyToken=null</Type>
         <Type n="InputBoxInputAction">{e8e7e747-f76f-4dee-ab1c-b9637e41ac26}</Type>
+        <Type n="InputBoxInputAction[]">_3S.CoDeSys.VisualElem.InputBoxInputAction[], VisualElem.plugin, Version=3.5.10.32, Culture=neutral, PublicKeyToken=null</Type>
         <Type n="Int16">System.Int16</Type>
         <Type n="Int32">System.Int32</Type>
         <Type n="Int64">System.Int64</Type>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.17">
   <POU Name="DatabaseStateMachine" Id="{770f277b-6e28-4759-91b2-1c985738d310}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM DatabaseStateMachine
 VAR_INPUT
@@ -28,6 +28,7 @@ VAR
 	
 	CalculateTemp: fbCalculateSetpoint;
 	CalculateLight1: fbCalculateSetpoint;
+	CalculateLight2: fbCalculateSetpoint;
 	CalculateHumidity: fbCalculateSetpoint;
 	
 	
@@ -37,6 +38,9 @@ VAR
 	
 	nextLineLight1: ST_ProgramStruct;
 	previousLineLight1: ST_ProgramStruct;
+	
+	nextLineLight2: ST_ProgramStruct;
+	previousLineLight2: ST_ProgramStruct;
 	
 	nextLineHumidity: ST_ProgramStruct;
 	previousLineHumidity: ST_ProgramStruct;
@@ -112,7 +116,21 @@ CASE iState OF
 				
 		END_IF
 	3:
-		//GET LIGHT 1 LEVEL
+		//GET LIGHT 2 LEVEL
+		QueryProgram(sColumn:='[Light2]');
+		
+		IF QueryProgram.bSuccess THEN
+				iState:=iState+1;
+				nextLineLight2:=QueryProgram.arrRecords;
+				previousLineLight2:=QueryProgram.previousLine;
+				
+				IF QueryProgram.bEndOfProgram THEN
+					nextLineLight2.iTime:=nextLineLight2.iTime+1440;
+				END_IF
+				
+		END_IF
+	4:
+		//GET HUMIDITY
 		QueryProgram(sColumn:='[Humidity]');
 		
 		IF QueryProgram.bSuccess THEN
@@ -125,7 +143,7 @@ CASE iState OF
 				END_IF
 				
 		END_IF
-	4:
+	5:
 	//Success!
 	allOutputsSet:=TRUE;
 	iState:=0;
@@ -162,6 +180,19 @@ CalculateLight1(
 		bStepStart:=bStepStart);
 		
 fbScaleValue(rInputPercent:=GVL.Light1Percent,rMaxValue:=GVL.Light1Max,iScaled=>GVL.Light1Level);
+
+CalculateLight2(
+		currentValue:=GVL.Light2Percent,
+		nextSetpointValue:= nextLineLight2.Light2, 
+		nextSetpointTime:= nextLineLight2.iTime, 
+		currentSetpoint:= GVL.Light2Percent,
+		previousSetpoint:=previousLineLight2.Light2,
+		previousSetpointTime:=previousLineLight2.iTime, 
+		stepMode:= GVL.Light2Stepmode, 
+		setpoint=> GVL.Light2Percent,
+		bStepStart:=bStepStart);
+		
+fbScaleValue(rInputPercent:=GVL.Light2Percent,rMaxValue:=GVL.Light2Max,iScaled=>GVL.Light2Level);
 
 CalculateHumidity(
 		currentValue:=GVL.Humidity,
@@ -222,6 +253,7 @@ CalculateHumidity(
       <LineId Id="331" Count="0" />
       <LineId Id="325" Count="0" />
       <LineId Id="103" Count="0" />
+      <LineId Id="565" Count="13" />
       <LineId Id="447" Count="12" />
       <LineId Id="446" Count="0" />
       <LineId Id="285" Count="3" />
@@ -235,6 +267,8 @@ CalculateHumidity(
       <LineId Id="244" Count="0" />
       <LineId Id="246" Count="11" />
       <LineId Id="245" Count="0" />
+      <LineId Id="583" Count="11" />
+      <LineId Id="582" Count="0" />
       <LineId Id="467" Count="10" />
       <LineId Id="466" Count="0" />
     </LineIds>

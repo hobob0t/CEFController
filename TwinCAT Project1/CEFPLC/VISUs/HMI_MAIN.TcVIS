@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <Visu Name="HMI_MAIN" Id="{83561f98-e78a-4de4-8243-2a057e1f5cca}">
     <XmlArchive>
       <Data>
@@ -175,7 +175,7 @@
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
-                      <v n="Value">"757"</v>
+                      <v n="Value">"188"</v>
                     </o>
                   </l>
                 </o>
@@ -344,7 +344,7 @@
                           <o t="DynamicArrayNode">
                             <o n="DynamicArrayNodeCounterNode" t="BasicTypeNode">
                               <v n="Flags">0L</v>
-                              <v n="BasicTypeNodeValue" t="Int16">7</v>
+                              <v n="BasicTypeNodeValue" t="Int16">8</v>
                               <v n="BasicTypeNodeAcceptsExpression">false</v>
                               <n n="BasicTypeNodeFastAccess" />
                               <a n="BasicTypeNodeEnumValues" et="String" />
@@ -616,6 +616,36 @@
                                 <n n="DescriptionTextID" />
                                 <v n="DescriptionUseParent">false</v>
                               </o>
+                              <o>
+                                <v n="VisuNodeReferenceGuid">{00000000-0000-0000-0000-000000000000}</v>
+                                <n n="VisuNodeReference" />
+                                <v n="VisNodeRefs33">"Watering"</v>
+                                <l n="TypeNodeChildren" t="ArrayList" />
+                                <o n="TypeNodeType" t="TypeNodeType">
+                                  <v n="TypeClass" t="TypeClass">Userdef</v>
+                                  <v n="QualifiedName">"IVisualisation"</v>
+                                  <v n="Name">"IVisualisation"</v>
+                                </o>
+                                <v n="TypeNodeName">"[7]"</v>
+                                <o n="TypeNodeAttributes" t="TypeNodeAttributes2">
+                                  <v n="AttrFlags">0UL</v>
+                                  <d n="TypeNodeAttributesData" t="CaseInsensitiveHashtable" ckt="String" cvt="String">
+                                    <v>ieccodeconversion_useexistinginterface</v>
+                                    <v>_3S.CoDeSys.VisuGenerated.IVisualisationIEC</v>
+                                    <v>conditionalshow</v>
+                                    <v>visu_elemdev</v>
+                                    <v>''NORMAL__COMMENT</v>
+                                    <v> interface contains additional methods to IVisualElement</v>
+                                  </d>
+                                  <v n="ConvDone">true</v>
+                                </o>
+                                <v n="TypeNodeId" t="Int16">1</v>
+                                <v n="TypeNodeIdLong">3693736907L</v>
+                                <n n="LibraryId" />
+                                <n n="DisplayTextId" />
+                                <n n="DescriptionTextID" />
+                                <v n="DescriptionUseParent">false</v>
+                              </o>
                             </l>
                             <o n="TypeNodeType" t="TypeNodeType">
                               <v n="TypeClass" t="TypeClass">Userdef</v>
@@ -649,7 +679,7 @@
                           </o>
                           <o t="BasicTypeNode">
                             <v n="Flags">0L</v>
-                            <v n="BasicTypeNodeValue" t="Int16">7</v>
+                            <v n="BasicTypeNodeValue" t="Int16">8</v>
                             <v n="BasicTypeNodeAcceptsExpression">false</v>
                             <n n="BasicTypeNodeFastAccess" />
                             <a n="BasicTypeNodeEnumValues" et="String" />
@@ -999,6 +1029,39 @@
                         <v n="DescriptionUseParent">false</v>
                       </o>
                     </o>
+                    <o>
+                      <v n="Id">3693736907L</v>
+                      <o n="Value" t="VisualizationNode">
+                        <v n="VisuNodeReferenceGuid">{00000000-0000-0000-0000-000000000000}</v>
+                        <n n="VisuNodeReference" />
+                        <v n="VisNodeRefs33">"Watering"</v>
+                        <l n="TypeNodeChildren" t="ArrayList" />
+                        <o n="TypeNodeType" t="TypeNodeType">
+                          <v n="TypeClass" t="TypeClass">Userdef</v>
+                          <v n="QualifiedName">"IVisualisation"</v>
+                          <v n="Name">"IVisualisation"</v>
+                        </o>
+                        <v n="TypeNodeName">"[7]"</v>
+                        <o n="TypeNodeAttributes" t="TypeNodeAttributes2">
+                          <v n="AttrFlags">0UL</v>
+                          <d n="TypeNodeAttributesData" t="CaseInsensitiveHashtable" ckt="String" cvt="String">
+                            <v>ieccodeconversion_useexistinginterface</v>
+                            <v>_3S.CoDeSys.VisuGenerated.IVisualisationIEC</v>
+                            <v>conditionalshow</v>
+                            <v>visu_elemdev</v>
+                            <v>''NORMAL__COMMENT</v>
+                            <v> interface contains additional methods to IVisualElement</v>
+                          </d>
+                          <v n="ConvDone">true</v>
+                        </o>
+                        <v n="TypeNodeId" t="Int16">1</v>
+                        <v n="TypeNodeIdLong">3693736907L</v>
+                        <n n="LibraryId" />
+                        <n n="DisplayTextId" />
+                        <n n="DescriptionTextID" />
+                        <v n="DescriptionUseParent">false</v>
+                      </o>
+                    </o>
                   </l>
                 </o>
                 <v n="VisualElementName">"Frame"</v>
@@ -1017,6 +1080,7 @@
                     <v>ManualMode</v>
                     <v>IO</v>
                     <v>Alarms</v>
+                    <v>Watering</v>
                   </a>
                 </o>
                 <d n="VisualElementInputActions" t="Hashtable" />
@@ -1202,7 +1266,7 @@
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
-                      <v n="Value">"880"</v>
+                      <v n="Value">"189"</v>
                     </o>
                   </l>
                 </o>
@@ -1405,7 +1469,7 @@
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
-                      <v n="Value">"541"</v>
+                      <v n="Value">"190"</v>
                     </o>
                   </l>
                 </o>
@@ -1629,7 +1693,7 @@
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
-                      <v n="Value">"883"</v>
+                      <v n="Value">"191"</v>
                     </o>
                   </l>
                 </o>
@@ -1832,7 +1896,7 @@
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
-                      <v n="Value">"658"</v>
+                      <v n="Value">"192"</v>
                     </o>
                   </l>
                 </o>
@@ -2056,7 +2120,7 @@
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
-                      <v n="Value">"819"</v>
+                      <v n="Value">"193"</v>
                     </o>
                   </l>
                 </o>
@@ -2260,7 +2324,7 @@
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
-                      <v n="Value">"598"</v>
+                      <v n="Value">"194"</v>
                     </o>
                   </l>
                 </o>
@@ -2432,7 +2496,7 @@
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
-                      <v n="Value">"312"</v>
+                      <v n="Value">"195"</v>
                     </o>
                   </l>
                 </o>
@@ -2586,7 +2650,7 @@
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
-                      <v n="Value">"312"</v>
+                      <v n="Value">"195"</v>
                     </o>
                   </l>
                 </o>
@@ -2772,7 +2836,7 @@
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
-                      <v n="Value">"231"</v>
+                      <v n="Value">"196"</v>
                     </o>
                   </l>
                 </o>
@@ -2782,7 +2846,7 @@
                 <v n="VisualElementIdentifier">"GenElemInst_85"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <n n="VisualElementFrameInformation" />
-                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="IInputAction[]">
+                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="VisuUserMgmtInputAction[]">
                   <v>OnMouseClick</v>
                   <a cet="VisuUserMgmtInputAction">
                     <o>
@@ -2972,7 +3036,7 @@
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
-                      <v n="Value">"865"</v>
+                      <v n="Value">"197"</v>
                     </o>
                   </l>
                 </o>
@@ -3187,7 +3251,7 @@
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
-                      <v n="Value">"815"</v>
+                      <v n="Value">"198"</v>
                     </o>
                   </l>
                 </o>
@@ -3197,7 +3261,7 @@
                 <v n="VisualElementIdentifier">"GenElemInst_89"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <n n="VisualElementFrameInformation" />
-                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="IInputAction[]">
+                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="VisuUserMgmtInputAction[]">
                   <v>OnMouseClick</v>
                   <a cet="VisuUserMgmtInputAction">
                     <o>
@@ -3405,7 +3469,7 @@
                     </o>
                     <o>
                       <v n="Id">823443203L</v>
-                      <v n="Value">"921"</v>
+                      <v n="Value">"199"</v>
                     </o>
                   </l>
                 </o>
@@ -3415,7 +3479,7 @@
                 <v n="VisualElementIdentifier">"GenElemInst_91"</v>
                 <n n="VisualElementOfflinePaintCommands" />
                 <n n="VisualElementFrameInformation" />
-                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="IInputAction[]">
+                <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="VisuUserMgmtInputAction[]">
                   <v>OnMouseClick</v>
                   <a cet="VisuUserMgmtInputAction">
                     <o>
@@ -3658,7 +3722,6 @@
         <Type n="Guid">System.Guid</Type>
         <Type n="Hashtable">System.Collections.Hashtable</Type>
         <Type n="HotkeyConfiguration">{6b108d46-58af-4e41-a3f4-174d8f160cc4}</Type>
-        <Type n="IInputAction[]">_3S.CoDeSys.VisualElem.IInputAction[], VisualElem, Version=3.5.10.0, Culture=neutral, PublicKeyToken=null</Type>
         <Type n="Int16">System.Int16</Type>
         <Type n="Int32">System.Int32</Type>
         <Type n="Int64">System.Int64</Type>
@@ -3688,6 +3751,7 @@
         <Type n="VisualObject">{f18bec89-9fef-401d-9953-2f11739a6808}</Type>
         <Type n="VisuUserMgmtDialogType">{736384f6-db22-43b1-93c0-d647f94c4fca}</Type>
         <Type n="VisuUserMgmtInputAction">{90722319-5366-4489-810a-357c35644546}</Type>
+        <Type n="VisuUserMgmtInputAction[]">_3S.CoDeSys.VisualElem.VisuUserMgmtInputAction[], VisualElem.plugin, Version=3.5.10.32, Culture=neutral, PublicKeyToken=null</Type>
       </TypeList>
     </XmlArchive>
     <ObjectProperties>

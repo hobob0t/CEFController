@@ -10,6 +10,12 @@ VAR
 
 	pulseDuration: TIME:=TIME#2S;
 END_VAR
+
+VAR_OUTPUT
+	
+HeatersON:BOOL;
+	
+END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[//This program pulses the heaters for a certain number of seconds based on the PID output
@@ -22,7 +28,7 @@ fbTON(PT := TIME#30S0MS);
 fbTP();
 
 //If the output of the pulse timer is true, turn on the heater valve
-IO_VARS.HEATERS:=fbTP.Q;
+HeatersON:=fbTP.Q;
 
 
 //Don't worry about negative values
@@ -40,7 +46,7 @@ IF TempPID.HeatingOutput >=0 THEN
 	//If the durataion is greater than the max duration
 	//Just turn it on and leave it on
 	IF pulseDuration>fbTON.PT THEN
-		IO_VARS.HEATERS:=TRUE;
+		HeatersON:=TRUE;
 	ELSE
 	
 		IF fbTON.Q=TRUE THEN //when the timer is true 
@@ -65,7 +71,7 @@ END_IF]]></ST>
       <LineId Id="80" Count="0" />
       <LineId Id="22" Count="0" />
       <LineId Id="84" Count="0" />
-      <LineId Id="83" Count="0" />
+      <LineId Id="106" Count="0" />
       <LineId Id="30" Count="0" />
       <LineId Id="33" Count="0" />
       <LineId Id="85" Count="0" />

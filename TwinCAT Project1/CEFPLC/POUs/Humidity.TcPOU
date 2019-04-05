@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <POU Name="Humidity" Id="{47cd93a2-3b55-48b0-8bb8-11e10d85378c}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM Humidity
 VAR
@@ -9,6 +9,14 @@ VAR
 	fbTP: TP;
 
 	pulseDuration: TIME:=TIME#2S;
+END_VAR
+
+VAR_OUTPUT
+	
+HumidityON:BOOL;
+	
+
+
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -22,7 +30,7 @@ fbTON(PT := TIME#30S0MS);
 fbTP();
 
 //If the output of the pulse timer is true, turn on the humidity valve
-IO_VARS.HUMVALVE:=fbTP.Q;
+HumidityON:=fbTP.Q;
 
 
 //Don't worry about negative values
@@ -40,7 +48,7 @@ IF HumidityPID.output >=0 THEN
 	//If the durataion is greater than the max duration
 	//Just turn it on and leave it on
 	IF pulseDuration>fbTON.PT THEN
-		IO_VARS.HUMVALVE:=TRUE;
+		HumidityON:=TRUE;
 	ELSE
 	
 		IF fbTON.Q=TRUE THEN //when the timer is true 
@@ -65,7 +73,7 @@ END_IF]]></ST>
       <LineId Id="80" Count="0" />
       <LineId Id="22" Count="0" />
       <LineId Id="84" Count="0" />
-      <LineId Id="83" Count="0" />
+      <LineId Id="106" Count="0" />
       <LineId Id="30" Count="0" />
       <LineId Id="33" Count="0" />
       <LineId Id="85" Count="0" />

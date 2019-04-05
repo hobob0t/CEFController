@@ -62,23 +62,23 @@
 							<Name>IO_VARS.HUM_SENS</Name>
 							<Type>INT</Type>
 						</Var>
+						<Var>
+							<Name>IO_VARS.HUM_SENS2</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL.tempSensor2</Name>
+							<Type>INT</Type>
+						</Var>
 					</Vars>
 					<Vars VarGrpType="2">
 						<Name>PlcTask Outputs</Name>
-						<Var>
-							<Name>IO_VARS.HEATERS</Name>
-							<Type>BOOL</Type>
-						</Var>
 						<Var>
 							<Name>GVL.iTempControl</Name>
 							<Type>INT</Type>
 						</Var>
 						<Var>
 							<Name>IO_VARS.ENABLE</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO_VARS.HUMVALVE</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -104,6 +104,38 @@
 						<Var>
 							<Name>IO_VARS.HPS3</Name>
 							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO_VARS.AUX1</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO_VARS.AUX2</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO_VARS.AUX3</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO_VARS.ALARM</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO_VARS.HEATERS</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO_VARS.HUMVALVE</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>IO_VARS.FANSPEED</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>IO_VARS.GLYCOL_VALVE</Name>
+							<Type>INT</Type>
 						</Var>
 					</Vars>
 					<TaskPouOids>
@@ -612,16 +644,23 @@ Bit1: Value bigger/equal Limit2]]>
 				<Link VarA="PlcTask Outputs^IO_VARS.MH3" VarB="Channel 3^Output"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^Term 1 (EK1100)^Term 4 (EL2008)">
+				<Link VarA="PlcTask Outputs^IO_VARS.ALARM" VarB="Channel 5^Output"/>
+				<Link VarA="PlcTask Outputs^IO_VARS.AUX1" VarB="Channel 1^Output"/>
+				<Link VarA="PlcTask Outputs^IO_VARS.AUX2" VarB="Channel 2^Output"/>
+				<Link VarA="PlcTask Outputs^IO_VARS.AUX3" VarB="Channel 3^Output"/>
 				<Link VarA="PlcTask Outputs^IO_VARS.ENABLE" VarB="Channel 7^Output"/>
 				<Link VarA="PlcTask Outputs^IO_VARS.HEATERS" VarB="Channel 4^Output"/>
 				<Link VarA="PlcTask Outputs^IO_VARS.HUMVALVE" VarB="Channel 6^Output"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^Term 1 (EK1100)^Term 5 (EL3064)">
 				<Link VarA="PlcTask Inputs^GVL.tempSensor" VarB="AI Standard Channel 1^Value"/>
+				<Link VarA="PlcTask Inputs^GVL.tempSensor2" VarB="AI Standard Channel 3^Value"/>
 				<Link VarA="PlcTask Inputs^IO_VARS.HUM_SENS" VarB="AI Standard Channel 2^Value"/>
+				<Link VarA="PlcTask Inputs^IO_VARS.HUM_SENS2" VarB="AI Standard Channel 4^Value"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^Term 1 (EK1100)^Term 6 (EL4002)">
-				<Link VarA="PlcTask Outputs^GVL.iTempControl" VarB="AO Outputs Channel 1^Analog output"/>
+				<Link VarA="PlcTask Outputs^IO_VARS.FANSPEED" VarB="AO Outputs Channel 2^Analog output"/>
+				<Link VarA="PlcTask Outputs^IO_VARS.GLYCOL_VALVE" VarB="AO Outputs Channel 1^Analog output"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>

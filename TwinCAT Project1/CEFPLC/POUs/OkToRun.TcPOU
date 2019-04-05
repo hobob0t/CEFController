@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <POU Name="OkToRun" Id="{31a4ced2-eb7b-4495-8b26-88a3f28b5673}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM OkToRun
 VAR
@@ -74,21 +74,19 @@ IF GVL.manualMode=FALSE THEN
 			alarmTimeout.IN:=FALSE;
 			
 		END_IF
-		//Refridgeration alarm
-(*			IF IO_VARS.PRESSURE_SENSE=FALSE AND IO_VARS.ENABLE=TRUE THEN
-			alarmTimeout.IN:=TRUE;
-			IF alarmTimeout.Q=TRUE THEN
-				GVL.sAlarmText:='Compressor Trouble Alarm';
+		//Temperature sensor alarm
+		IF ABS((GVL.Temp-GVL.Temp2)*100/GVL.Temp)>GVL.TempCalibrationLimit THEN
+				GVL.sAlarmText:='Temperature Sensor Error.';
 				GVL.bCriticalAlarm:=TRUE;
-				alarmTimeout.IN:=FALSE;
-				
-			END_IF
-				
-		ELSE
-		
-			alarmTimeout.IN:=FALSE;
 		END_IF
-		*)
+		
+		//Humidity sensor alarm
+		IF ABS((GVL.Humidity-GVL.Humidity2)*100/GVL.Humidity)>GVL.HumCalibrationLimit THEN
+				GVL.sAlarmText:='Humidity Sensor Error.';
+				GVL.bCriticalAlarm:=TRUE;
+		END_IF
+		
+
 	END_IF
 	
 	
@@ -153,10 +151,14 @@ END_IF
       <LineId Id="190" Count="0" />
       <LineId Id="188" Count="0" />
       <LineId Id="140" Count="0" />
-      <LineId Id="129" Count="4" />
-      <LineId Id="178" Count="0" />
-      <LineId Id="134" Count="5" />
-      <LineId Id="92" Count="1" />
+      <LineId Id="263" Count="0" />
+      <LineId Id="267" Count="1" />
+      <LineId Id="266" Count="0" />
+      <LineId Id="269" Count="0" />
+      <LineId Id="271" Count="3" />
+      <LineId Id="270" Count="0" />
+      <LineId Id="264" Count="0" />
+      <LineId Id="93" Count="0" />
       <LineId Id="176" Count="0" />
       <LineId Id="179" Count="1" />
       <LineId Id="101" Count="0" />

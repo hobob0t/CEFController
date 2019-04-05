@@ -10,9 +10,10 @@ VAR_GLOBAL
 	cycleTime: LREAL;
 	
 	tempSensor AT %I*: INT; 
+	tempSensor2 AT %I*: INT; 
 	
-	Temp: LREAL;
-	Humidity:LREAL;
+	Temp,Temp2: LREAL;
+	Humidity,Humidity2:LREAL;
 
 	
 	reset: BOOL;
@@ -33,15 +34,20 @@ VAR_GLOBAL
 END_VAR
 
 VAR_GLOBAL PERSISTENT
-	KpCooling : LREAL := -1500;
-	KiCooling : LREAL := 180;
+	KpCooling : LREAL := 10;
+	KiCooling : LREAL := 550;
 	KdCooling : LREAL := 0;
-	KvCooling : LREAL := 90;
+	KvCooling : LREAL := 800;
 	
-	KpHeating : LREAL := 1500;
-	KiHeating : LREAL := 180;
+	KpHeating : LREAL := 3000;
+	KiHeating : LREAL := 550;
 	KdHeating: LREAL := 0;
-	KvHeating : LREAL := 90;
+	KvHeating : LREAL := 320;
+	
+	KpHumidity : LREAL := 1;
+	KiHumidity : LREAL := 1;
+	KdHumidity: LREAL := 0;
+	KvHumidity : LREAL := 1;
 	
 	CurrentProgram: LINT;
 	CurrentProgramName:STRING(255);
@@ -52,13 +58,16 @@ VAR_GLOBAL PERSISTENT
 	TempAlarmHigh:LREAL:=50;
 	TempAlarmLow:LREAL:=4;
 	
+	TempCalibrationLimit:REAL:=10;//in percent
+	HumCalibrationLimit:REAL:=10;//in percent
 	//Don't change this without also changing
 	//iMax in AlarmLogger
 	aAlarms:ARRAY[0..15] OF ST_ChamberAlarm;
 	
 	okToRun:BOOL;
 	iState:INT;
-	HMIPowerButton:BOOL;
+	
+	
 	
 	//Setpoint variable declariations
 	Light1Max:INT:=2; //Max light level
@@ -77,6 +86,18 @@ VAR_GLOBAL PERSISTENT
 	HumiditySetpoint:LREAL;
 	HumidityStepmode:BOOL;
 	
+	
+	///HMI VARS
+	HMIPowerButton:BOOL;
+	HMIFanSpeed:INT;
+	HMIWateringStartHour:DWORD;
+	HMIWateringStartMinute:DWORD;
+	HMIWateringTimeSeconds:DWORD;
+	
+	//Watering
+	wateringDays: ARRAY[0..6] OF BOOL; //if element 0 is True, then water on Sunday, if element 1 is true, water on Monday. etc
+	watertingTime:TIME;//How long to water
+	watertingStart:TOD;//When to start watering
 END_VAR
 
 

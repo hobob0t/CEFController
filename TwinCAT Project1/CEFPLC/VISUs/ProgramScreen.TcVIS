@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <Visu Name="ProgramScreen" Id="{a6649c2f-7194-46ae-81ca-d92d77f74cf0}">
     <XmlArchive>
       <Data>
@@ -198,10 +198,10 @@
               <d n="FbMethods" t="CaseInsensitiveHashtable" ckt="String" cvt="Guid">
                 <v>FB_Init</v>
                 <v>5c619be7-3523-42ba-ac42-0704c5f42758</v>
-                <v>FB_Reinit</v>
-                <v>209a9e94-9ac9-4534-a980-259e23659480</v>
                 <v>FB_Exit</v>
                 <v>4d0294dc-e6d5-4278-ba6c-8fd9ca4f7027</v>
+                <v>FB_Reinit</v>
+                <v>209a9e94-9ac9-4534-a980-259e23659480</v>
               </d>
               <v n="FbName">"NotImportant"</v>
               <v n="FbGuid">{d7330f53-1aae-4492-a663-77bd13a45d17}</v>

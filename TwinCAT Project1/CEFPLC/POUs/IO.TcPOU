@@ -13,50 +13,85 @@ END_VAR
       <ST><![CDATA[
 	
 
-GVL.Temp := 0.010071*INT_TO_LREAL(GVL.tempSensor) - 39.996;//((INT_TO_LREAL(GVL.tempSensor)/3.2767) - 0.2424*5000)*165/5000; //Scaled for 0-5V with range -20 to 70C. See documentation for sensor
+GVL.Temp := 0.010071*INT_TO_LREAL(GVL.tempSensor) - 39.996;//See documentation for sensor
 GVL.Humidity := (INT_TO_LREAL(IO_VARS.HUM_SENS)/3.2767)*100/5000;
 
+GVL.Temp2 := 0.010071*INT_TO_LREAL(GVL.tempSensor2) - 39.996;//See documentation for sensor
+GVL.Humidity2 := (INT_TO_LREAL(IO_VARS.HUM_SENS2)/3.2767)*100/5000;
+
+IO_VARS.ALARM:=GVL.bCriticalAlarm;//alarm buzzer
+
+
+//Check this variable just to make sure we don't break anything
+IF GVL.HMIFanSpeed>100 THEN
+	GVL.HMIFanSpeed:=100;
+END_IF
+
+IF GVL.HMIFanSpeed<0 THEN
+	GVL.HMIFanSpeed:=0;
+END_IF
+
+IO_VARS.FANSPEED := REAL_TO_INT(16384*-50*LOG(0.00001*(63949-630*GVL.HMIFanSpeed))/100);//Scaling. outout is nonlinear for this board. Equation is x = -50 log(.00001(63949 - 630 y))
+	
+IF IO_VARS.FANSPEED>16385 THEN
+	IO_VARS.FANSPEED:=16385;//DO NOT EXCEED 5 VOLTS FOR THAT CONTROL BOARD
+END_IF
+
+IF IO_VARS.FANSPEED<3276 THEN
+	IO_VARS.FANSPEED:=3276;//IT'S DANGERIOUS TO RUN THE CHAMBER WITH THE FANS COMPLETELY OFF
+END_IF
 
 
 IF GVL.manualMode=FALSE THEN
 	
-////////////MAPPING METAL HALIDE LIGHTS/////////////
-IF GVL.Light1Level=0 THEN
-	IO_VARS.MH1:=0;
-	IO_VARS.MH2:=0;
-	IO_VARS.MH3:=0;
-ELSIF  GVL.Light1Level=1 THEN
-	IO_VARS.MH1:=1;
-	IO_VARS.MH2:=0;
-	IO_VARS.MH3:=0;
-ELSIF  GVL.Light1Level=2 THEN
-	IO_VARS.MH1:=1;
-	IO_VARS.MH2:=1;
-	IO_VARS.MH3:=0;
-ELSIF  GVL.Light1Level=3 THEN
-	IO_VARS.MH1:=1;
-	IO_VARS.MH2:=1;
-	IO_VARS.MH3:=1;
-END_IF
-
-////////////MAPPING HIGH PRESSURE SODIUM LIGHTS/////////////
-IF GVL.Light2Level=0 THEN
-	IO_VARS.HPS1:=0;
-	IO_VARS.HPS2:=0;
-	IO_VARS.HPS3:=0;
-ELSIF  GVL.Light2Level=1 THEN
-	IO_VARS.HPS1:=1;
-	IO_VARS.HPS2:=0;
-	IO_VARS.HPS3:=0;
-ELSIF  GVL.Light2Level=2 THEN
-	IO_VARS.HPS1:=1;
-	IO_VARS.HPS2:=1;
-	IO_VARS.HPS3:=0;
-ELSIF  GVL.Light2Level=3 THEN
-	IO_VARS.HPS1:=1;
-	IO_VARS.HPS2:=1;
-	IO_VARS.HPS3:=1;
-END_IF
+	//Set the valve state
+	IO_VARS.GLYCOL_VALVE:=GVL.iTempControl;
+	
+	IO_VARS.AUX1:=Watering.waterOn;//Watering bound to aux 1
+	
+	//If the output of the pulse timer is true, turn on the heater valve
+	IO_VARS.HEATERS:=HeaterDuty.HeatersON;
+	
+	//If the output of the pulse timer is true, turn on the humidity valve
+	IO_VARS.HUMVALVE:=Humidity.HumidityON;
+		
+	////////////MAPPING METAL HALIDE LIGHTS/////////////
+	IF GVL.Light1Level=0 THEN
+		IO_VARS.MH1:=0;
+		IO_VARS.MH2:=0;
+		IO_VARS.MH3:=0;
+	ELSIF  GVL.Light1Level=1 THEN
+		IO_VARS.MH1:=1;
+		IO_VARS.MH2:=0;
+		IO_VARS.MH3:=0;
+	ELSIF  GVL.Light1Level=2 THEN
+		IO_VARS.MH1:=1;
+		IO_VARS.MH2:=1;
+		IO_VARS.MH3:=0;
+	ELSIF  GVL.Light1Level=3 THEN
+		IO_VARS.MH1:=1;
+		IO_VARS.MH2:=1;
+		IO_VARS.MH3:=1;
+	END_IF
+	
+	////////////MAPPING HIGH PRESSURE SODIUM LIGHTS/////////////
+	IF GVL.Light2Level=0 THEN
+		IO_VARS.HPS1:=0;
+		IO_VARS.HPS2:=0;
+		IO_VARS.HPS3:=0;
+	ELSIF  GVL.Light2Level=1 THEN
+		IO_VARS.HPS1:=1;
+		IO_VARS.HPS2:=0;
+		IO_VARS.HPS3:=0;
+	ELSIF  GVL.Light2Level=2 THEN
+		IO_VARS.HPS1:=1;
+		IO_VARS.HPS2:=1;
+		IO_VARS.HPS3:=0;
+	ELSIF  GVL.Light2Level=3 THEN
+		IO_VARS.HPS1:=1;
+		IO_VARS.HPS2:=1;
+		IO_VARS.HPS3:=1;
+	END_IF
 	
 END_IF]]></ST>
     </Implementation>
@@ -65,8 +100,30 @@ END_IF]]></ST>
       <LineId Id="82" Count="1" />
       <LineId Id="5" Count="0" />
       <LineId Id="74" Count="0" />
+      <LineId Id="222" Count="1" />
+      <LineId Id="221" Count="0" />
+      <LineId Id="191" Count="1" />
+      <LineId Id="204" Count="0" />
+      <LineId Id="203" Count="0" />
+      <LineId Id="183" Count="3" />
+      <LineId Id="188" Count="2" />
+      <LineId Id="187" Count="0" />
       <LineId Id="162" Count="0" />
-      <LineId Id="86" Count="3" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="182" Count="0" />
+      <LineId Id="171" Count="0" />
+      <LineId Id="175" Count="0" />
+      <LineId Id="174" Count="0" />
+      <LineId Id="177" Count="2" />
+      <LineId Id="176" Count="0" />
+      <LineId Id="170" Count="0" />
+      <LineId Id="87" Count="1" />
+      <LineId Id="218" Count="2" />
+      <LineId Id="201" Count="1" />
+      <LineId Id="214" Count="0" />
+      <LineId Id="212" Count="1" />
+      <LineId Id="215" Count="2" />
+      <LineId Id="89" Count="0" />
       <LineId Id="18" Count="0" />
       <LineId Id="54" Count="2" />
       <LineId Id="100" Count="0" />

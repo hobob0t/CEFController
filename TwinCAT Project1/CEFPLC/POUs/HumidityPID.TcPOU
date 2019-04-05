@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <POU Name="HumidityPID" Id="{a8c07c7d-f9f1-49d5-818f-a19bd745ddbc}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM HumidityPID
 VAR
@@ -21,7 +21,7 @@ VAR_OUTPUT
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[//Convert realative humidity to absolute humidity
+      <ST><![CDATA[//Convert realative humidity to absolute humidity in grams per cubic meter
 AH:= A*EXPT	(10,m*GVL.Temp/(GVL.Temp+Tn))*(GVL.Humidity/100)*100*2.16679/(273.15+GVL.Temp);
 AHSetpoint:= A*EXPT(10,m*GVL.TempSetpoint/(GVL.TempSetpoint+Tn))*(GVL.HumiditySetpoint/100)*100*2.16679/(273.15+GVL.TempSetpoint);
 
@@ -31,10 +31,10 @@ PID(
 	fActualValue:=AH, 
 	bReset:=bReset, 
 	fCtrlCycleTime:=1, 
-	fKp:=1, 
-	fTn:=1, 
-	fTv:=1, 
-	fTd:=0, 
+	fKp:=GVL.KpHumidity, 
+	fTn:=GVL.KiHumidity, 
+	fTv:=GVL.KvHumidity, 
+	fTd:=GVL.KdHumidity, 
 	fCtrlOutput=>output);
 	
 	

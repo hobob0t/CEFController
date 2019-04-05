@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <Visu Name="GraphScreen" Id="{c82a5f96-6d6e-4979-a04e-fa6429e6ff8c}">
     <XmlArchive>
       <Data>
@@ -198,10 +198,10 @@
               <d n="FbMethods" t="CaseInsensitiveHashtable" ckt="String" cvt="Guid">
                 <v>FB_Init</v>
                 <v>a9c0237a-87a6-443f-b33e-1754c13f1bd3</v>
-                <v>FB_Reinit</v>
-                <v>d5025814-7342-46be-a5cf-fc5df3da9afd</v>
                 <v>FB_Exit</v>
                 <v>d39e8c59-a5f0-4576-b5e5-e8e8af18dc93</v>
+                <v>FB_Reinit</v>
+                <v>d5025814-7342-46be-a5cf-fc5df3da9afd</v>
               </d>
               <v n="FbName">"NotImportant"</v>
               <v n="FbGuid">{efd5676a-05ec-4ff0-9789-b73b2a6364ab}</v>

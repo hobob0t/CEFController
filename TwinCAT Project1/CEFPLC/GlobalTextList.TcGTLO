@@ -1,276 +1,293 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
-  <GlobalTextList Name="GlobalTextList" Id="{f62a83ae-a9db-4733-810e-db5d8f8f08ab}">
+  <GlobalTextList Name="GlobalTextList" Id="{9a336c36-933c-4bd2-a664-0c096552eefa}">
     <XmlArchive>
       <Data>
         <o xml:space="preserve" t="GlobalTextListObject">
           <l n="TextList" t="ArrayList" cet="TextListRow">
             <o>
-              <v n="TextID">"91"</v>
+              <v n="TextID">"746"</v>
               <v n="TextDefault">"%.0f"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"893"</v>
+              <v n="TextID">"406"</v>
               <v n="TextDefault">"%.1f"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"356"</v>
-              <v n="TextDefault">"%.2f"</v>
+              <v n="TextID">"576"</v>
+              <v n="TextDefault">"%.1f%%"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"421"</v>
-              <v n="TextDefault">"%0.2f"</v>
+              <v n="TextID">"940"</v>
+              <v n="TextDefault">"%.3f"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"270"</v>
-              <v n="TextDefault">"%1.0f"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"572"</v>
-              <v n="TextDefault">"%10.0f"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"269"</v>
+              <v n="TextID">"386"</v>
               <v n="TextDefault">"%2.0f"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"886"</v>
-              <v n="TextDefault">"%2.1f"</v>
+              <v n="TextID">"388"</v>
+              <v n="TextDefault">"%2.0f %%"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"319"</v>
+              <v n="TextID">"166"</v>
+              <v n="TextDefault">"%2.0f%%"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"1002"</v>
+              <v n="TextDefault">"%2.1f C"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"383"</v>
               <v n="TextDefault">"%2.2f"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"87"</v>
-              <v n="TextDefault">"%2.5f"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"451"</v>
-              <v n="TextDefault">"%2f"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"727"</v>
-              <v n="TextDefault">"%3.2f"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"238"</v>
-              <v n="TextDefault">"%f"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"145"</v>
-              <v n="TextDefault">"%f2"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"372"</v>
-              <v n="TextDefault">"%i"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"312"</v>
-              <v n="TextDefault">"%s"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"901"</v>
-              <v n="TextDefault">"'Help'"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"308"</v>
-              <v n="TextDefault">"32767"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"806"</v>
-              <v n="TextDefault">"&lt;-Cooling  Heating-&gt;"</v>
+              <v n="TextID">"975"</v>
+              <v n="TextDefault">"%2.2f C"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
               <v n="TextID">"489"</v>
-              <v n="TextDefault">"Acknowledg Alarms"</v>
+              <v n="TextDefault">"%2.2f g/m³"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"758"</v>
-              <v n="TextDefault">"acknowledge "</v>
+              <v n="TextID">"987"</v>
+              <v n="TextDefault">"%d"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"580"</v>
-              <v n="TextDefault">"Acknowledge 
-Alarms"</v>
+              <v n="TextID">"947"</v>
+              <v n="TextDefault">"%i"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"468"</v>
+              <v n="TextID">"195"</v>
+              <v n="TextDefault">"%s"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"477"</v>
+              <v n="TextDefault">"%X"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"748"</v>
+              <v n="TextDefault">"Abs. Humidity"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"243"</v>
               <v n="TextDefault">"Acknowledge Alarms"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"675"</v>
+              <v n="TextID">"599"</v>
               <v n="TextDefault">"Admin"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"188"</v>
+              <v n="TextID">"134"</v>
+              <v n="TextDefault">"Alarm"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"405"</v>
               <v n="TextDefault">"Alarm Note"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"598"</v>
+              <v n="TextID">"194"</v>
               <v n="TextDefault">"Alarms"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"142"</v>
-              <v n="TextDefault">"Back"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"597"</v>
-              <v n="TextDefault">"Co2"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"427"</v>
-              <v n="TextDefault">"Compressor Pressure Sensor"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"90"</v>
+              <v n="TextID">"742"</v>
               <v n="TextDefault">"Contactor"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"384"</v>
+              <v n="TextID">"745"</v>
               <v n="TextDefault">"Cooling                         Heating"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"366"</v>
-              <v n="TextDefault">"Cooling           Heating"</v>
+              <v n="TextID">"945"</v>
+              <v n="TextDefault">"Cooling PID"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"274"</v>
-              <v n="TextDefault">"CoSensor"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"982"</v>
+              <v n="TextID">"747"</v>
               <v n="TextDefault">"Current Program"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"902"</v>
+              <v n="TextID">"398"</v>
+              <v n="TextDefault">"Current Program:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"404"</v>
               <v n="TextDefault">"Date &amp; Time"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"33"</v>
+              <v n="TextID">"162"</v>
+              <v n="TextDefault">"DO 10"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"741"</v>
+              <v n="TextDefault">"DO 11"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"409"</v>
+              <v n="TextDefault">"DO 9"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"656"</v>
               <v n="TextDefault">"Enable"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"589"</v>
-              <v n="TextDefault">"Flourescent Lights"</v>
+              <v n="TextID">"948"</v>
+              <v n="TextDefault">"Fan Speed %"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"968"</v>
-              <v n="TextDefault">"Fluorescent Lights"</v>
+              <v n="TextID">"581"</v>
+              <v n="TextDefault">"For this many seconds:"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"883"</v>
+              <v n="TextID">"82"</v>
+              <v n="TextDefault">"Friday"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"191"</v>
               <v n="TextDefault">"Graph"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"859"</v>
+              <v n="TextID">"853"</v>
               <v n="TextDefault">"Heaters"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"262"</v>
-              <v n="TextDefault">"Help"</v>
+              <v n="TextID">"949"</v>
+              <v n="TextDefault">"Heating PID"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"520"</v>
-              <v n="TextDefault">"High Pressure Sodium Lvl 1"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"511"</v>
+              <v n="TextID">"241"</v>
               <v n="TextDefault">"High Temperature Limit"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"880"</v>
+              <v n="TextID">"189"</v>
               <v n="TextDefault">"Home"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"365"</v>
+              <v n="TextID">"61"</v>
+              <v n="TextDefault">"Hour"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"298"</v>
+              <v n="TextDefault">"HPS"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"496"</v>
               <v n="TextDefault">"HPS Lvl 1"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"766"</v>
+              <v n="TextID">"850"</v>
               <v n="TextDefault">"HPS Lvl 2"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"542"</v>
+              <v n="TextID">"851"</v>
               <v n="TextDefault">"HPS Lvl 3"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"265"</v>
-              <v n="TextDefault">"Hum"</v>
+              <v n="TextID">"481"</v>
+              <v n="TextDefault">"Hum. Calibration Alarm"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"214"</v>
+              <v n="TextID">"297"</v>
               <v n="TextDefault">"Humidity"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"734"</v>
+              <v n="TextID">"852"</v>
               <v n="TextDefault">"Humidity Add"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"491"</v>
-              <v n="TextDefault">"ID"</v>
+              <v n="TextID">"296"</v>
+              <v n="TextDefault">"Humidity PID"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"472"</v>
-              <v n="TextDefault">"In ramp mode, this is the 
-deviation from the setpoint
-
-In step mode, these are absolute values"</v>
+              <v n="TextID">"507"</v>
+              <v n="TextDefault">"Humidity sensor 1"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"260"</v>
+              <v n="TextID">"762"</v>
+              <v n="TextDefault">"Humidity sensor 2"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"442"</v>
+              <v n="TextDefault">"Humidity sensor Humidity sensor 1"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"68"</v>
+              <v n="TextDefault">"Humidity Valve"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"1017"</v>
+              <v n="TextDefault">"If the percent difference between
+ the two sensors is greater than 
+these values, the system will alarm
+ and stop."</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"396"</v>
+              <v n="TextDefault">"If the percent difference between
+the two sensors is greater than 
+these values, the system will alarm
+and stop."</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"79"</v>
+              <v n="TextDefault">"If the percent difference between the two sensors is greater than these values, the system will alarm and stop."</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"244"</v>
               <v n="TextDefault">"In ramp mode, this is the deviation from 
 the setpoint
 
@@ -278,255 +295,311 @@ In step mode, these are absolute values"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"349"</v>
-              <v n="TextDefault">"In ramp mode, this is the deviation from the setpoint
-
-In step mode, these are absolute values"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"290"</v>
-              <v n="TextDefault">"In RAMP mode: This is the maximum deivation from the setpoint
-
-"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"469"</v>
-              <v n="TextDefault">"Incandescent Lights"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"819"</v>
+              <v n="TextID">"193"</v>
               <v n="TextDefault">"IO"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"219"</v>
-              <v n="TextDefault">"Kd"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"866"</v>
-              <v n="TextDefault">"Ki"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"268"</v>
+              <v n="TextID">"941"</v>
               <v n="TextDefault">"Kp"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"121"</v>
-              <v n="TextDefault">"Kv"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"405"</v>
+              <v n="TextID">"657"</v>
               <v n="TextDefault">"Level 1 Light"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"205"</v>
-              <v n="TextDefault">"Level 2 Light"</v>
+              <v n="TextID">"74"</v>
+              <v n="TextDefault">"Level 1 Light 1"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"908"</v>
-              <v n="TextDefault">"Light Level 1"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"486"</v>
-              <v n="TextDefault">"Light Level 2"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"231"</v>
-              <v n="TextDefault">"Log In"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"921"</v>
-              <v n="TextDefault">"Log Out"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"157"</v>
-              <v n="TextDefault">"Low Temperature Limit"</v>
+              <v n="TextID">"548"</v>
+              <v n="TextDefault">"Level 1 Light 2"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
               <v n="TextID">"658"</v>
+              <v n="TextDefault">"Level 2 Light"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"40"</v>
+              <v n="TextDefault">"Level 2 Light 1"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"376"</v>
+              <v n="TextDefault">"Level 2 Light 2"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"709"</v>
+              <v n="TextDefault">"Level 3 Light 1"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"369"</v>
+              <v n="TextDefault">"Level 3 Light 2"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"743"</v>
+              <v n="TextDefault">"Light Level 1"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"744"</v>
+              <v n="TextDefault">"Light Level 2"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"196"</v>
+              <v n="TextDefault">"Log In"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"199"</v>
+              <v n="TextDefault">"Log Out"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"242"</v>
+              <v n="TextDefault">"Low Temperature Limit"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"192"</v>
               <v n="TextDefault">"Manual Mode"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"973"</v>
+              <v n="TextID">"655"</v>
               <v n="TextDefault">"Manual Mode Only Available When Program  Is Not Running"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"422"</v>
+              <v n="TextID">"937"</v>
+              <v n="TextDefault">"Metal Halide"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"493"</v>
               <v n="TextDefault">"Metal Halide Lvl 1"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"748"</v>
+              <v n="TextID">"494"</v>
               <v n="TextDefault">"Metal Halide Lvl 2"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"899"</v>
+              <v n="TextID">"495"</v>
               <v n="TextDefault">"Metal Halide Lvl 3"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"682"</v>
-              <v n="TextDefault">"Name"</v>
+              <v n="TextID">"585"</v>
+              <v n="TextDefault">"Minute"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"891"</v>
+              <v n="TextID">"448"</v>
+              <v n="TextDefault">"Monday"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"602"</v>
               <v n="TextDefault">"None"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"117"</v>
-              <v n="TextDefault">"Open Graph"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"337"</v>
+              <v n="TextID">"601"</v>
               <v n="TextDefault">"Operator"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"914"</v>
-              <v n="TextDefault">"PID Constants"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"72"</v>
+              <v n="TextID">"946"</v>
               <v n="TextDefault">"PID Equation Ref."</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"757"</v>
+              <v n="TextID">"188"</v>
               <v n="TextDefault">"Programs"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"972"</v>
+              <v n="TextID">"938"</v>
               <v n="TextDefault">"Ramp"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"71"</v>
-              <v n="TextDefault">"Ramping Multiplier"</v>
+              <v n="TextID">"387"</v>
+              <v n="TextDefault">"Rel. Humidity"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"346"</v>
+              <v n="TextID">"200"</v>
+              <v n="TextDefault">"Saturday"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"491"</v>
               <v n="TextDefault">"Schedule Sequence"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"424"</v>
+              <v n="TextID">"600"</v>
               <v n="TextDefault">"Service"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"316"</v>
+              <v n="TextID">"385"</v>
               <v n="TextDefault">"Setpoint"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"541"</v>
+              <v n="TextID">"190"</v>
               <v n="TextDefault">"Settings"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"865"</v>
+              <v n="TextID">"321"</v>
+              <v n="TextDefault">"Setup Watering"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"197"</v>
               <v n="TextDefault">"Start/Stop"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"457"</v>
+              <v n="TextID">"410"</v>
+              <v n="TextDefault">"Stating A (Hour and Minute:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"323"</v>
+              <v n="TextDefault">"Stating At :"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"304"</v>
+              <v n="TextDefault">"Stating at this time :"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"117"</v>
+              <v n="TextDefault">"Stating At:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"939"</v>
               <v n="TextDefault">"Step"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"952"</v>
+              <v n="TextID">"929"</v>
+              <v n="TextDefault">"Sunday"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"944"</v>
               <v n="TextDefault">"Td"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"360"</v>
-              <v n="TextDefault">"Temp"</v>
+              <v n="TextID">"399"</v>
+              <v n="TextDefault">"Temp Calibration Alarm"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"833"</v>
+              <v n="TextID">"651"</v>
+              <v n="TextDefault">"Temp sensor 1"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"474"</v>
+              <v n="TextDefault">"Temp sensor 2"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"235"</v>
+              <v n="TextDefault">"Temp. Sensor "</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"384"</v>
               <v n="TextDefault">"Temperature"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"70"</v>
-              <v n="TextDefault">"Time"</v>
+              <v n="TextID">"614"</v>
+              <v n="TextDefault">"Thursday"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"180"</v>
+              <v n="TextID">"942"</v>
               <v n="TextDefault">"Tn"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"226"</v>
+              <v n="TextID">"375"</v>
+              <v n="TextDefault">"Tueday"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"322"</v>
+              <v n="TextDefault">"Tuesday"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"943"</v>
               <v n="TextDefault">"Tv"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"815"</v>
+              <v n="TextID">"198"</v>
               <v n="TextDefault">"Users"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"38"</v>
+              <v n="TextID">"659"</v>
               <v n="TextDefault">"Valve Control 
 (Integer 0-32767)"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"493"</v>
-              <v n="TextDefault">"Valve Control (Integer 0-32767)"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"690"</v>
-              <v n="TextDefault">"Valve Control Output"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"189"</v>
-              <v n="TextDefault">"Valve Control32767"</v>
-              <l n="LanguageTexts" t="ArrayList" />
-            </o>
-            <o>
-              <v n="TextID">"561"</v>
+              <v n="TextID">"492"</v>
               <v n="TextDefault">"Valve State"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
-              <v n="TextID">"282"</v>
-              <v n="TextDefault">"ytes"</v>
+              <v n="TextID">"633"</v>
+              <v n="TextDefault">"Water on:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"921"</v>
+              <v n="TextDefault">"Watering solenoid must be connected to Digital Out 9"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"858"</v>
+              <v n="TextDefault">"Watering solenoid must be connection to Digital Out 9"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"125"</v>
+              <v n="TextDefault">"Wednesday"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
           </l>
           <l n="Languages" t="ArrayList" />
-          <v n="GuidInit">{505afdc8-e368-4cf8-ba94-6ee1e1fd243b}</v>
-          <v n="GuidReInit">{9a624e30-0101-4ffa-8aa3-e239080ac5e9}</v>
-          <v n="GuidExitX">{8f414eee-e3cb-4252-adab-e3f30205c378}</v>
+          <v n="GuidInit">{2525c254-6088-4709-89d7-8d6874f36adc}</v>
+          <v n="GuidReInit">{6af1e15b-bfcf-46b3-8282-c4aca9f8b692}</v>
+          <v n="GuidExitX">{e82a1c5d-2a43-490f-be88-a37fa1d9eb24}</v>
         </o>
       </Data>
       <TypeList>

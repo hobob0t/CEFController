@@ -65,7 +65,7 @@
       <Name>HumidityPulseTime</Name>
       <Type>Float</Type>
       <Mode>MAPPED</Mode>
-      <MappedSymbolID>9</MappedSymbolID>
+      <MappedSymbolID>8</MappedSymbolID>
     </Column>
   </Columns>
 </Table>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.17">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <POU Name="DatabaseStateMachine" Id="{770f277b-6e28-4759-91b2-1c985738d310}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM DatabaseStateMachine
 VAR_INPUT
@@ -30,6 +30,8 @@ VAR
 	CalculateLight1: fbCalculateSetpoint;
 	CalculateLight2: fbCalculateSetpoint;
 	CalculateHumidity: fbCalculateSetpoint;
+	CalculateDO10: fbCalculateSetpoint;
+	CalculateDO11: fbCalculateSetpoint;
 	
 	
 	
@@ -44,6 +46,15 @@ VAR
 	
 	nextLineHumidity: ST_ProgramStruct;
 	previousLineHumidity: ST_ProgramStruct;
+	
+	nextLineDO10: ST_ProgramStruct;
+	previousLineDO10: ST_ProgramStruct;
+	
+	nextLineDO11: ST_ProgramStruct;
+	previousLineDO11: ST_ProgramStruct;
+	
+	//temp holder for conversion to bool
+	tempVar:REAL;
 	
 END_VAR
 ]]></Declaration>
@@ -103,7 +114,7 @@ CASE iState OF
 		
 	2:
 		//GET LIGHT 1 LEVEL
-		QueryProgram(sColumn:='[Light1]');
+		QueryProgram(sColumn:='[Light1_MH]');
 		
 		IF QueryProgram.bSuccess THEN
 				iState:=iState+1;
@@ -117,7 +128,7 @@ CASE iState OF
 		END_IF
 	3:
 		//GET LIGHT 2 LEVEL
-		QueryProgram(sColumn:='[Light2]');
+		QueryProgram(sColumn:='[Light2_HPS]');
 		
 		IF QueryProgram.bSuccess THEN
 				iState:=iState+1;
@@ -144,6 +155,36 @@ CASE iState OF
 				
 		END_IF
 	5:
+		//DIGITAL OUT 10
+		QueryProgram(sColumn:='[DigitalOut10]');
+		
+		IF QueryProgram.bSuccess THEN
+				iState:=iState+1;
+				nextLineDO10:=QueryProgram.arrRecords;
+				previousLineDO10:=QueryProgram.previousLine;
+				
+				IF QueryProgram.bEndOfProgram THEN
+					nextLineDO10.iTime:=nextLineLight2.iTime+1440;
+				END_IF
+				
+		END_IF
+	6:
+		//DIGITAL OUT 11
+		QueryProgram(sColumn:='[DigitalOut11]');
+		
+		IF QueryProgram.bSuccess THEN
+				iState:=iState+1;
+				nextLineDO11:=QueryProgram.arrRecords;
+				previousLineDO11:=QueryProgram.previousLine;
+				
+				IF QueryProgram.bEndOfProgram THEN
+					nextLineDO11.iTime:=nextLineLight2.iTime+1440;
+				END_IF
+				
+		END_IF
+	
+		
+	7:
 	//Success!
 	allOutputsSet:=TRUE;
 	iState:=0;
@@ -203,8 +244,34 @@ CalculateHumidity(
 		previousSetpointTime:=previousLineHumidity.iTime, 
 		stepMode:= GVL.HumidityStepmode, 
 		setpoint=> GVL.HumiditySetpoint,
-		bStepStart:=FALSE);
-]]></ST>
+		bStepStart:=bStepStart);
+
+	
+CalculateDO10(
+		currentValue:=BOOL_TO_REAL(IO_VARS.AUX2),
+		nextSetpointValue:= BOOL_TO_REAL(nextLineDO10.DO10), 
+		nextSetpointTime:= nextLineDO10.iTime, 
+		currentSetpoint:= BOOL_TO_REAL(IO_VARS.AUX2),
+		previousSetpoint:=BOOL_TO_REAL(previousLineDO10.DO10),
+		previousSetpointTime:=previousLineDO10.iTime, 
+		stepMode:= TRUE,//Digital Auxillaries are always step mode 
+		setpoint=> tempVar,
+		bStepStart:=bStepStart);
+		
+IO_VARS.AUX2:=REAL_TO_BOOL(tempVar);
+		
+CalculateDO11(
+		currentValue:=BOOL_TO_REAL(IO_VARS.AUX3),
+		nextSetpointValue:= BOOL_TO_REAL(nextLineDO11.DO11), 
+		nextSetpointTime:= nextLineDO11.iTime, 
+		currentSetpoint:= BOOL_TO_REAL(IO_VARS.AUX3),
+		previousSetpoint:=BOOL_TO_REAL(previousLineDO11.DO11),
+		previousSetpointTime:=previousLineDO11.iTime, 
+		stepMode:= TRUE,//Digital Auxillaries are always step mode 
+		setpoint=> tempVar,
+		bStepStart:=bStepStart);
+		
+IO_VARS.AUX3:=REAL_TO_BOOL(tempVar);]]></ST>
     </Implementation>
     <LineIds Name="DatabaseStateMachine">
       <LineId Id="162" Count="7" />
@@ -255,7 +322,13 @@ CalculateHumidity(
       <LineId Id="103" Count="0" />
       <LineId Id="565" Count="13" />
       <LineId Id="447" Count="12" />
-      <LineId Id="446" Count="0" />
+      <LineId Id="640" Count="0" />
+      <LineId Id="668" Count="12" />
+      <LineId Id="654" Count="0" />
+      <LineId Id="682" Count="12" />
+      <LineId Id="681" Count="0" />
+      <LineId Id="695" Count="0" />
+      <LineId Id="710" Count="0" />
       <LineId Id="285" Count="3" />
       <LineId Id="159" Count="1" />
       <LineId Id="10" Count="0" />
@@ -270,7 +343,14 @@ CalculateHumidity(
       <LineId Id="583" Count="11" />
       <LineId Id="582" Count="0" />
       <LineId Id="467" Count="10" />
-      <LineId Id="466" Count="0" />
+      <LineId Id="713" Count="0" />
+      <LineId Id="712" Count="0" />
+      <LineId Id="728" Count="8" />
+      <LineId Id="726" Count="0" />
+      <LineId Id="743" Count="2" />
+      <LineId Id="747" Count="8" />
+      <LineId Id="746" Count="0" />
+      <LineId Id="761" Count="1" />
     </LineIds>
   </POU>
 </TcPlcObject>

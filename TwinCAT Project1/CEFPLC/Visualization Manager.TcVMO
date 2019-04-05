@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <VisuManager Name="Visualization Manager" Id="{5a7b8b85-d0ad-4d0b-932e-d1a637980f4a}">
     <XmlArchive>
       <Data>
@@ -534,9 +534,9 @@
                 </o>
                 <o>
                   <v n="Id">1</v>
-                  <v n="Name">"Service"</v>
+                  <v n="Name">"sudo"</v>
                   <v n="FullName">"Service"</v>
-                  <v n="Password">"E3A4098B740ACB2B05B60CFAFB58C815"</v>
+                  <v n="Password">"6D5ABABB65E9FF214B73E891B4AFE6E8"</v>
                   <v n="Group">"Service"</v>
                   <v n="IsDeactivated">false</v>
                   <v n="Description">"service"</v>
@@ -544,9 +544,9 @@
                 </o>
                 <o>
                   <v n="Id">2</v>
-                  <v n="Name">"Operator"</v>
+                  <v n="Name">"user"</v>
                   <v n="FullName">"Operator"</v>
-                  <v n="Password">"9CE4B5879F3FCB5A9842547BEBE191E1"</v>
+                  <v n="Password">"309FC7D3BC53BB63AC42E359260AC740"</v>
                   <v n="Group">"Operator"</v>
                   <v n="IsDeactivated">false</v>
                   <v n="Description">"user"</v>
@@ -564,7 +564,7 @@
                   <v n="LogOffTimeUnit" t="TimeUnit">Minute</v>
                   <v n="RightToChangeUser">true</v>
                   <v n="Description">""</v>
-                  <v n="GroupNameIndex">"675"</v>
+                  <v n="GroupNameIndex">"599"</v>
                   <l n="UserMembers" t="ArrayList" cet="Int32">
                     <v>0</v>
                   </l>
@@ -577,7 +577,7 @@
                   <v n="LogOffTimeUnit" t="TimeUnit">Minute</v>
                   <v n="RightToChangeUser">false</v>
                   <v n="Description">""</v>
-                  <v n="GroupNameIndex">"424"</v>
+                  <v n="GroupNameIndex">"600"</v>
                   <l n="UserMembers" t="ArrayList" cet="Int32">
                     <v>1</v>
                   </l>
@@ -590,7 +590,7 @@
                   <v n="LogOffTimeUnit" t="TimeUnit">Minute</v>
                   <v n="RightToChangeUser">false</v>
                   <v n="Description">""</v>
-                  <v n="GroupNameIndex">"337"</v>
+                  <v n="GroupNameIndex">"601"</v>
                   <l n="UserMembers" t="ArrayList" cet="Int32">
                     <v>2</v>
                   </l>
@@ -603,7 +603,7 @@
                   <v n="LogOffTimeUnit" t="TimeUnit">Minute</v>
                   <v n="RightToChangeUser">false</v>
                   <v n="Description">""</v>
-                  <v n="GroupNameIndex">"891"</v>
+                  <v n="GroupNameIndex">"602"</v>
                   <l n="UserMembers" t="ArrayList" />
                 </o>
               </l>

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="Watering" Id="{19a66220-0e9e-4f45-bda0-7029e04300f6}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM Watering
+VAR
+	
+	trigger:F_TRIG;
+	waterTimer:TON;
+	waterOn:BOOL;
+	dtTime:DT;
+	todTime:TOD;
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+GVL.watertingTime:=DWORD_TO_TIME(GVL.HMIWateringTimeSeconds*1000);//in ms
+GVL.watertingStart:=DWORD_TO_TOD((GVL.HMIWateringStartHour*60 + GVL.HMIWateringStartMinute)*60*1000);//also in ms
+
+
+
+dtTime:=SYSTEMTIME_TO_DT(GVL.fbLocalSystemTime.systemTime);
+todTime:=DT_TO_TOD(dtTime);
+waterTimer(PT:=GVL.watertingTime);
+
+IF GVL.wateringDays[GVL.fbLocalSystemTime.systemTime.wDayOfWeek]=TRUE THEN
+	IF todTime>=GVL.watertingStart AND todTime<=(GVL.watertingStart+GVL.watertingTime) THEN
+		waterOn:=TRUE;
+	ELSE
+		waterOn:=FALSE;
+	END_IF
+END_IF
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="Watering">
+      <LineId Id="33" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="39" Count="1" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="29" Count="1" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="41" Count="1" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="20" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

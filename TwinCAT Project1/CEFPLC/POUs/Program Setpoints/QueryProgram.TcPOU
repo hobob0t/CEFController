@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <POU Name="QueryProgram" Id="{ab1d6f67-866b-496c-bd51-28af300b2d5e}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM QueryProgram
 VAR_INPUT
@@ -55,7 +55,7 @@ fbSQLDatabase:=DBConnector.fbSQLDatabase;
 CASE iState OF
 0:
 //IDLE
-fbTON(PT := TIME#2S0MS);
+fbTON(PT := TIME#250MS);
 bSuccess:=FALSE;
 bEndOfProgram:=FALSE;
 //Build command

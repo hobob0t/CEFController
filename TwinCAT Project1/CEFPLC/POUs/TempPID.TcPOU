@@ -42,36 +42,29 @@ PIDHeating(
 	fTd:=GVL.KdHeating);
 	
 //Reset the PID back to 0 if the output is out of range
-IF  PIDCooling.fCtrlOutput>0 THEN
-	CoolingOutput:=0;
+IF  PIDCooling.fCtrlOutput>50 THEN
 	bResetCooling:=TRUE;
 ELSIF GVL.reset =  TRUE THEN
 	bResetCooling:=TRUE;
 ELSE
 	bResetCooling:=FALSE;
+	CoolingOutput:=PIDCooling.fCtrlOutput*-105+14089; //<----important scaling function because the old staefa valves are weird. See documentation for siemens ZM-101A
 END_IF
 
 //Reset the PID back to 0 if the output is out of range
-IF PIDHeating.fCtrlOutput<0 THEN
-	HeatingOutput:=0;
+IF PIDHeating.fCtrlOutput<-30000 THEN
 	bResetHeat:=TRUE;
 ELSIF GVL.reset =  TRUE THEN
 	bResetHeat:=TRUE;
 ELSE
 	bResetHeat:=FALSE;
-END_IF
-
-IF PIDCooling.fCtrlOutput<0 THEN
-	CoolingOutput:=PIDCooling.fCtrlOutput*-105+14089; //<----important scaling function because the old staefa valves are weird. See documentation for siemens ZM-101A
-	HeatingOutput:=0;
-END_IF
-
-
-IF PIDHeating.fCtrlOutput>0 THEN
-	CoolingOutput:=0;
 	HeatingOutput:=PIDHeating.fCtrlOutput;//No need to scale the heater output. Just use PID constants
 END_IF
 
+//If there is more than 5% cooling demand, turn off the heaters completely. (i.e. don't waste energy)
+IF PIDCooling.fCtrlOutput<-5 THEN
+	HeatingOutput:=0;
+END_IF
 
 //Scale temp signal for analog out to avoid overflows/negative numbers
 IF CoolingOutput>=32767 THEN
@@ -102,24 +95,21 @@ END_IF]]></ST>
       <LineId Id="52" Count="0" />
       <LineId Id="56" Count="0" />
       <LineId Id="133" Count="0" />
-      <LineId Id="32" Count="0" />
       <LineId Id="47" Count="0" />
       <LineId Id="33" Count="0" />
       <LineId Id="48" Count="0" />
       <LineId Id="50" Count="1" />
+      <LineId Id="228" Count="0" />
       <LineId Id="49" Count="0" />
       <LineId Id="209" Count="0" />
       <LineId Id="170" Count="0" />
-      <LineId Id="172" Count="6" />
+      <LineId Id="172" Count="0" />
+      <LineId Id="174" Count="4" />
+      <LineId Id="229" Count="0" />
       <LineId Id="171" Count="0" />
-      <LineId Id="183" Count="2" />
-      <LineId Id="187" Count="0" />
-      <LineId Id="186" Count="0" />
-      <LineId Id="205" Count="0" />
-      <LineId Id="204" Count="0" />
-      <LineId Id="188" Count="2" />
-      <LineId Id="134" Count="0" />
+      <LineId Id="230" Count="0" />
       <LineId Id="207" Count="0" />
+      <LineId Id="231" Count="2" />
       <LineId Id="206" Count="0" />
       <LineId Id="135" Count="0" />
       <LineId Id="138" Count="6" />

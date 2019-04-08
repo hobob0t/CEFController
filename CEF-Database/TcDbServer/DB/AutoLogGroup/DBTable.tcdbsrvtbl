@@ -67,5 +67,11 @@
       <Mode>MAPPED</Mode>
       <MappedSymbolID>8</MappedSymbolID>
     </Column>
+    <Column>
+      <Name>Alarm</Name>
+      <Type>Bit</Type>
+      <Mode>MAPPED</Mode>
+      <MappedSymbolID>10</MappedSymbolID>
+    </Column>
   </Columns>
 </Table>

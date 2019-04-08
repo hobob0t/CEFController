@@ -84,5 +84,14 @@
       <IndexGroup>16448</IndexGroup>
       <IndexOffset>752088</IndexOffset>
     </Symbol>
+    <Symbol>
+      <ID>10</ID>
+      <Name>GVL.bCriticalAlarm</Name>
+      <AllocationName>bCriticalAlarm</AllocationName>
+      <DataType>BOOL</DataType>
+      <BitSize>8</BitSize>
+      <IndexGroup>16448</IndexGroup>
+      <IndexOffset>1562134</IndexOffset>
+    </Symbol>
   </Symbols>
 </SymbolList>

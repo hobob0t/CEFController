@@ -66,6 +66,8 @@ IF PIDCooling.fCtrlOutput<-5 THEN
 	HeatingOutput:=0;
 END_IF
 
+
+
 //Scale temp signal for analog out to avoid overflows/negative numbers
 IF CoolingOutput>=32767 THEN
 	GVL.iTempControl :=32767;
@@ -110,6 +112,8 @@ END_IF]]></ST>
       <LineId Id="230" Count="0" />
       <LineId Id="207" Count="0" />
       <LineId Id="231" Count="2" />
+      <LineId Id="265" Count="0" />
+      <LineId Id="247" Count="0" />
       <LineId Id="206" Count="0" />
       <LineId Id="135" Count="0" />
       <LineId Id="138" Count="6" />

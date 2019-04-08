@@ -129,7 +129,7 @@ CASE GVL.iState OF
 
 		
 	ELSIF GVL.bCriticalAlarm=TRUE THEN//If shutdown WITH error
-
+		GVL.reset:=TRUE;//Reset the PIDs before restarting
 		restartTime.IN:=TRUE;
 		GVL.sInfoText:='Acknowledge alarm or wait for auto restart';
 		IF restartTime.Q THEN //Try restarting after the timer has elapsed
@@ -138,6 +138,7 @@ CASE GVL.iState OF
 			restartTime.IN:=FALSE;
 			GVL.iState:=1;
 			GVL.sInfoText:='Error occured...restarting';
+			
 		ELSIF GVL.bActiveAlarm=FALSE THEN //Clear error if the user has pressed the acknowledge alarm button
 			restartTime.IN:=FALSE;
 			GVL.bCriticalAlarm:=FALSE;
@@ -251,6 +252,7 @@ END_CASE
       <LineId Id="804" Count="3" />
       <LineId Id="815" Count="0" />
       <LineId Id="843" Count="0" />
+      <LineId Id="1228" Count="0" />
       <LineId Id="808" Count="2" />
       <LineId Id="816" Count="0" />
       <LineId Id="844" Count="0" />

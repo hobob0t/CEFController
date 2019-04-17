@@ -7,7 +7,7 @@
   <StartMode>AutoStart</StartMode>
   <LogMode>cyclic</LogMode>
   <RingBuffParameter>0</RingBuffParameter>
-  <CycleTime>1000</CycleTime>
+  <CycleTime>10000</CycleTime>
   <DBID>1</DBID>
   <DBTableID>1</DBTableID>
   <FailOverDBTableID>0</FailOverDBTableID>

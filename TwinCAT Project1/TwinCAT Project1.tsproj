@@ -30,7 +30,7 @@
 	<Project ProjectGUID="{258F2D7A-9C2D-4611-85E0-DBA0AF7FE3FB}" TargetNetId="192.168.1.102.1.1" Target64Bit="true" ShowHideConfigurations="#x306">
 		<System>
 			<Licenses>
-				<Target BkhfOrder="00002845">
+				<Target BkhfOrder="00041392">
 					<ManualSelect>{92583661-35AE-45CE-BD4F-C35BFE16F07E}</ManualSelect>
 				</Target>
 			</Licenses>
@@ -55,6 +55,10 @@
 							<Type>INT</Type>
 						</Var>
 						<Var>
+							<Name>GVL.tempSensor2</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
 							<Name>IO_VARS.PRESSURE_SENSE</Name>
 							<Type>BOOL</Type>
 						</Var>
@@ -64,10 +68,6 @@
 						</Var>
 						<Var>
 							<Name>IO_VARS.HUM_SENS2</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL.tempSensor2</Name>
 							<Type>INT</Type>
 						</Var>
 					</Vars>
@@ -130,11 +130,11 @@
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>IO_VARS.FANSPEED</Name>
+							<Name>IO_VARS.GLYCOL_VALVE</Name>
 							<Type>INT</Type>
 						</Var>
 						<Var>
-							<Name>IO_VARS.GLYCOL_VALVE</Name>
+							<Name>IO_VARS.FANSPEED</Name>
 							<Type>INT</Type>
 						</Var>
 					</Vars>

@@ -93,5 +93,23 @@
       <IndexGroup>16448</IndexGroup>
       <IndexOffset>1562134</IndexOffset>
     </Symbol>
+    <Symbol>
+      <ID>11</ID>
+      <Name>GVL.HumiditySetpoint</Name>
+      <AllocationName>HumiditySetpoint</AllocationName>
+      <DataType>LREAL</DataType>
+      <BitSize>64</BitSize>
+      <IndexGroup>16448</IndexGroup>
+      <IndexOffset>1574496</IndexOffset>
+    </Symbol>
+    <Symbol>
+      <ID>12</ID>
+      <Name>IO_VARS.GLYCOL_VALVE</Name>
+      <AllocationName>GLYCOL_VALVE</AllocationName>
+      <DataType>INT</DataType>
+      <BitSize>16</BitSize>
+      <IndexGroup>61488</IndexGroup>
+      <IndexOffset>1574552</IndexOffset>
+    </Symbol>
   </Symbols>
 </SymbolList>

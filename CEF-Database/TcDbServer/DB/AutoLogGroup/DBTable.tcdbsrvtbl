@@ -35,13 +35,19 @@
       <Name>iTempControl</Name>
       <Type>SmallInt</Type>
       <Mode>MAPPED</Mode>
-      <MappedSymbolID>3</MappedSymbolID>
+      <MappedSymbolID>12</MappedSymbolID>
     </Column>
     <Column>
       <Name>Humidity</Name>
       <Type>Float</Type>
       <Mode>MAPPED</Mode>
       <MappedSymbolID>4</MappedSymbolID>
+    </Column>
+    <Column>
+      <Name>HumiditySetpoint</Name>
+      <Type>Float</Type>
+      <Mode>MAPPED</Mode>
+      <MappedSymbolID>11</MappedSymbolID>
     </Column>
     <Column>
       <Name>HeaterPulseTime</Name>

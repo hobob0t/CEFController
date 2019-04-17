@@ -34,6 +34,10 @@ VAR_GLOBAL
 END_VAR
 
 VAR_GLOBAL PERSISTENT
+	
+	//Steafa valve dead zone
+	valveDeadZone:LREAL:=15000;
+	
 	KpCooling : LREAL := 10;
 	KiCooling : LREAL := 550;
 	KdCooling : LREAL := 0;

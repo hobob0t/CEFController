@@ -39,8 +39,8 @@ PID(
 	
 	
 //Since there's no dehumidification on this chamber
-//Just reset the PID back to 0 if the output is negative
-IF output<0 THEN
+//Just reset the PID back to 0 if the output is out of range
+IF output<0 OR output>999999999 THEN
 	output:=0;
 	bReset:=TRUE;
 ELSIF GVL.reset =  TRUE THEN

@@ -110,6 +110,15 @@ Id;Default
 943;Tv
 198;Users
 659;Valve Control $R$N(Integer 0-32767)
+226;Valve Dead Zone
+407;Valve Dead Zone:
+757;Valve Dead Zone:$R$N
+1039;Valve Dead Zone:$R$NThe old Staefa valves do not $R$Nactually start to cool until the $R$Ncontrol signal is around 4.3V.$R$N$R$NBecause the analog signal goes from$R$N0 to 32767, this value should be $R$Naround 14,000 to 15,000.$R$N
+408;Valve Dead Zone:$R$NThe old Staefa valves do not $R$Nactually start to cool until the $R$Ncontrol signal is around 4.3V.$R$N$R$NBecause the analog signal goes from$R$N0 to 32767, this value should be $R$Naround 14,000 to 15,000.$R$N$R$NReplacing the valve with a modern$R$Nalternative will make this uncesessary$R$N
+313;Valve Dead Zone:$R$NThe old Staefa valves do not $R$Nactually start to cool until the $R$Ncontrol signal is around 4.3V.$R$N$R$NBecause the analog signal goes from$R$N0 to 32767, this value should be $R$Naround 14,000 to 15,000.$R$N$R$NReplacing the valve with a modern$R$Nalternative will make this uncesessary$R$Nand it can be set to 0$R$N
+950;Valve Dead Zone:$R$NThe old Staefa valves do not $R$Nactually start to cool until the $R$Ncontrol signal is around 4.3V.$R$N$R$NBecause the variable goes from$R$N0 to 32767, this value should be $R$Naround 14,000 to 15,000. $R$N(0 = 0V, 32767=10V)$R$N$R$NReplacing the valve with a modern$R$Nalternative will make this uncesessary$R$Nand it can be set to 0$R$N
+1177;Valve Dead Zone:$R$NThe old Staefa valves do not $R$Nactually start to cool until the $R$Ncontrol signal is around 4.3V.$R$N$R$NBecause the variable goes from$R$N0 to 32767, this value should be $R$Naround 14,000 to 15,000. (0 = 0V, 32767=10V)$R$N$R$NReplacing the valve with a modern$R$Nalternative will make this uncesessary$R$Nand it can be set to 0$R$N
+1010;Valve Dead Zone:$R$NThe old Staefa valves do not actually start to cool until the control signal is around 4.3V.$R$N
 492;Valve State
 633;Water on:
 921;Watering solenoid must be connected to Digital Out 9

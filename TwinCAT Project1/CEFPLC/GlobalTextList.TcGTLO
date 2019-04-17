@@ -571,6 +571,110 @@ In step mode, these are absolute values"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"226"</v>
+              <v n="TextDefault">"Valve Dead Zone"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"407"</v>
+              <v n="TextDefault">"Valve Dead Zone:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"757"</v>
+              <v n="TextDefault">"Valve Dead Zone:
+"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"1039"</v>
+              <v n="TextDefault">"Valve Dead Zone:
+The old Staefa valves do not 
+actually start to cool until the 
+control signal is around 4.3V.
+
+Because the analog signal goes from
+0 to 32767, this value should be 
+around 14,000 to 15,000.
+"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"408"</v>
+              <v n="TextDefault">"Valve Dead Zone:
+The old Staefa valves do not 
+actually start to cool until the 
+control signal is around 4.3V.
+
+Because the analog signal goes from
+0 to 32767, this value should be 
+around 14,000 to 15,000.
+
+Replacing the valve with a modern
+alternative will make this uncesessary
+"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"313"</v>
+              <v n="TextDefault">"Valve Dead Zone:
+The old Staefa valves do not 
+actually start to cool until the 
+control signal is around 4.3V.
+
+Because the analog signal goes from
+0 to 32767, this value should be 
+around 14,000 to 15,000.
+
+Replacing the valve with a modern
+alternative will make this uncesessary
+and it can be set to 0
+"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"950"</v>
+              <v n="TextDefault">"Valve Dead Zone:
+The old Staefa valves do not 
+actually start to cool until the 
+control signal is around 4.3V.
+
+Because the variable goes from
+0 to 32767, this value should be 
+around 14,000 to 15,000. 
+(0 = 0V, 32767=10V)
+
+Replacing the valve with a modern
+alternative will make this uncesessary
+and it can be set to 0
+"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"1177"</v>
+              <v n="TextDefault">"Valve Dead Zone:
+The old Staefa valves do not 
+actually start to cool until the 
+control signal is around 4.3V.
+
+Because the variable goes from
+0 to 32767, this value should be 
+around 14,000 to 15,000. (0 = 0V, 32767=10V)
+
+Replacing the valve with a modern
+alternative will make this uncesessary
+and it can be set to 0
+"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"1010"</v>
+              <v n="TextDefault">"Valve Dead Zone:
+The old Staefa valves do not actually start to cool until the control signal is around 4.3V.
+"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"492"</v>
               <v n="TextDefault">"Valve State"</v>
               <l n="LanguageTexts" t="ArrayList" />

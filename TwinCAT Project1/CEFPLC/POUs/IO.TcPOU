@@ -4,16 +4,16 @@
     <Declaration><![CDATA[PROGRAM IO
 VAR
 
-
+	previousTemp,newTemp:LREAL;
 	Scaled_control: LREAL;
 
+	alpha: LREAL:=0.01;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
-	
+      <ST><![CDATA[GVL.Temp := 0.010071*INT_TO_LREAL(GVL.tempSensor) - 39.996;//See documentation for sensor
 
-GVL.Temp := 0.010071*INT_TO_LREAL(GVL.tempSensor) - 39.996;//See documentation for sensor
+
 GVL.Humidity := (INT_TO_LREAL(IO_VARS.HUM_SENS)/3.2767)*100/5000;
 
 GVL.Temp2 := 0.010071*INT_TO_LREAL(GVL.tempSensor2) - 39.996;//See documentation for sensor
@@ -96,9 +96,9 @@ IF GVL.manualMode=FALSE THEN
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="IO">
-      <LineId Id="6" Count="0" />
-      <LineId Id="82" Count="1" />
       <LineId Id="5" Count="0" />
+      <LineId Id="231" Count="0" />
+      <LineId Id="237" Count="0" />
       <LineId Id="74" Count="0" />
       <LineId Id="222" Count="1" />
       <LineId Id="221" Count="0" />

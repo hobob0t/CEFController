@@ -6,27 +6,18 @@
 
 VAR
 
-	GETCPUCOUNTER: GETCPUCOUNTER; //CPU tick function block definition
 	previous_low_ticks,low_ticks,high_ticks: UDINT; //Vars to hold the cpu tick count
-	
-	
-	test: DINT; //I don't know what this is
-	sqlResult : WSTRING(255);//I don't think we need this anymore either
-	bsqlError: BOOL;//same ehere
-	
-	numberOfLinesOut: LINT; //and here
-	Scaled_control: LREAL;//this moved too
 
-	fbTON: TON := (PT := TIME#1S0MS); //PID TON TIMER.
-	restartTime: TON := (PT := TIME#60S0MS);//AUTO RESTART TIMER
 
-	
+	fbTON: TON := (PT := TIME#1S0MS); //PID TON TIMER. dooo nooottt change this
+	restartTime: TON := (PT := TIME#60S0MS);//AUTO RESTART TIMER.
 
 	getHost: FB_GetHostName; //Get host name function block definition
 	myName: STRING(255); //Var to hold host name. If the host name is more than 255 chars you're doing something wrong.
 	
 	FB_WritePersistentData: FB_WritePersistentData;
 	GETSYSTEMTIME:GETSYSTEMTIME;
+	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -156,10 +147,6 @@ CASE GVL.iState OF
 		END_IF
 	
 END_CASE
-
-
-
-	
 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
@@ -262,10 +249,6 @@ END_CASE
       <LineId Id="743" Count="6" />
       <LineId Id="582" Count="0" />
       <LineId Id="579" Count="0" />
-      <LineId Id="150" Count="0" />
-      <LineId Id="205" Count="0" />
-      <LineId Id="546" Count="0" />
-      <LineId Id="541" Count="0" />
       <LineId Id="543" Count="0" />
     </LineIds>
   </POU>

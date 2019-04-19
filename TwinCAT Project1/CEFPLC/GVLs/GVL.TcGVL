@@ -64,6 +64,8 @@ VAR_GLOBAL PERSISTENT
 	
 	TempCalibrationLimit:REAL:=10;//in percent
 	HumCalibrationLimit:REAL:=10;//in percent
+	
+
 	//Don't change this without also changing
 	//iMax in AlarmLogger
 	aAlarms:ARRAY[0..15] OF ST_ChamberAlarm;

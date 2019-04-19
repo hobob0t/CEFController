@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.17">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <POU Name="DeleteOldData" Id="{1550c6d5-2fcf-4e7e-b8a9-fe387f76ee6b}" SpecialFunc="None">
     <Declaration><![CDATA[		PROGRAM DeleteOldData
 
@@ -51,7 +51,7 @@ sCmd :='DELETE FROM Logger WHERE Timestamp <= datetime("now","-2 year")';
 CASE iState OF
 0:
 //IDLE
-fbTON(PT := TIME#2S0MS);
+fbTON(PT := TIME#900S0MS);
 IF fbTON.Q=TRUE THEN
 	iState:=1;
 	fbTON.IN:=FALSE;

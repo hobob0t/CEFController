@@ -29,6 +29,8 @@ IF GVL.wateringDays[GVL.fbLocalSystemTime.systemTime.wDayOfWeek]=TRUE THEN
 	ELSE
 		waterOn:=FALSE;
 	END_IF
+ELSE
+	waterOn:=FALSE;
 END_IF
 
 ]]></ST>
@@ -47,7 +49,8 @@ END_IF
       <LineId Id="29" Count="1" />
       <LineId Id="27" Count="0" />
       <LineId Id="41" Count="1" />
-      <LineId Id="28" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="55" Count="1" />
       <LineId Id="18" Count="0" />
       <LineId Id="20" Count="0" />
     </LineIds>

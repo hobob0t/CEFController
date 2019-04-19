@@ -9,8 +9,6 @@ VAR
 	bResetCooling: BOOL;
 	bResetHeat: BOOL;
 
-
-	
 END_VAR
 
 VAR_OUTPUT

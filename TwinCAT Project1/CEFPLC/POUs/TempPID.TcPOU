@@ -37,7 +37,7 @@ PIDHeating(
 	fActualValue:=GVL.Temp, 
 	bReset:=bResetHeat, 
 	fCtrlCycleTime:=1, 
-	fKp:=GVL.KpHeating, 
+	fKp:=GVL.KpHeating - ((GVL.Light1Level + GVL.Light2Level)/GVL.lightLoad)*GVL.KpHeating, //If the lights are on, you really don't need that much heating. So we scale it back based on how many lights are on.
 	fTn:=GVL.KiHeating, 
 	fTv:=GVL.KvHeating, 
 	fTd:=GVL.KdHeating);
@@ -61,13 +61,15 @@ ELSIF GVL.reset =  TRUE THEN
 	bResetHeat:=TRUE;
 ELSE
 	bResetHeat:=FALSE;
-	HeatingOutput:=PIDHeating.fCtrlOutput;//need to scale the heater output if there are lights on
+	HeatingOutput:=PIDHeating.fCtrlOutput;
 END_IF
 
 //If there is a lot of cooling demand, turn off the heaters completely. (i.e. don't waste energy)
 IF PIDCooling.fCtrlOutput<-2000 THEN
 	HeatingOutput:=0;
 END_IF
+
+
 
 
 //Scale temp signal for analog out to avoid overflows/negative numbers
@@ -116,7 +118,9 @@ END_IF]]></ST>
       <LineId Id="230" Count="0" />
       <LineId Id="207" Count="0" />
       <LineId Id="231" Count="2" />
+      <LineId Id="446" Count="0" />
       <LineId Id="247" Count="0" />
+      <LineId Id="447" Count="0" />
       <LineId Id="206" Count="0" />
       <LineId Id="135" Count="0" />
       <LineId Id="138" Count="6" />

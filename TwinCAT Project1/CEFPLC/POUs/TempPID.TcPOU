@@ -43,7 +43,7 @@ PIDHeating(
 	fTd:=GVL.KdHeating);
 	
 //Reset the PID back to 0 if the output is out of range
-IF  PIDCooling.fCtrlOutput>999999999 OR PIDCooling.fCtrlOutput<-999999999 THEN
+IF  PIDCooling.fCtrlOutput>GVL.valveDeadZone OR PIDCooling.fCtrlOutput<-999999999 THEN
 	bResetCooling:=TRUE;
 	CoolingOutput:=0;
 ELSIF GVL.reset =  TRUE THEN

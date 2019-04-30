@@ -26,4 +26,8 @@
   <Description />
   <FailOverDBID>0</FailOverDBID>
   <AdditionalParameter />
+  <AuthenticationMechanism>None</AuthenticationMechanism>
+  <SslCa />
+  <SslCertificateFilePath />
+  <SslCertificatePassword>UjztPioDjB0=</SslCertificatePassword>
 </Database>

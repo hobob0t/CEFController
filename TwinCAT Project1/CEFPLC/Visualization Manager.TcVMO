@@ -44,10 +44,10 @@
             <d n="FbMethods" t="CaseInsensitiveHashtable" ckt="String" cvt="Guid">
               <v>FB_Init</v>
               <v>69fd0cae-fe8b-4596-a63c-0a9b3ae85a9f</v>
-              <v>FB_Exit</v>
-              <v>e24e4b81-a129-48cd-8803-16b28cce6e30</v>
               <v>FB_Reinit</v>
               <v>6a80bb1c-c961-440f-8def-81181c9cc702</v>
+              <v>FB_Exit</v>
+              <v>e24e4b81-a129-48cd-8803-16b28cce6e30</v>
             </d>
             <v n="FbName">"__VisuInitInstantiation_Fb"</v>
             <v n="FbGuid">{a2fc3dfa-93cd-43e2-9980-1e0b141eb130}</v>
@@ -615,7 +615,58 @@
           <v n="UseLocalUserMgmt">true</v>
           <v n="UseUserMgmtInPlc">true</v>
           <n n="RemoteUserMgmtPath" />
-          <n n="FontsConfig" />
+          <o n="FontsConfig" t="LanguageFontsConfiguration">
+            <d2 n="Configuration" ckt="String" cvt="SingleLanguageFont">
+              <v>en</v>
+              <o>
+                <v n="Language">"en"</v>
+                <n n="Fontname" />
+                <v n="SizeFactor" t="Single">1</v>
+              </o>
+              <v>de</v>
+              <o>
+                <v n="Language">"de"</v>
+                <n n="Fontname" />
+                <v n="SizeFactor" t="Single">1</v>
+              </o>
+              <v>it</v>
+              <o>
+                <v n="Language">"it"</v>
+                <n n="Fontname" />
+                <v n="SizeFactor" t="Single">1</v>
+              </o>
+              <v>es</v>
+              <o>
+                <v n="Language">"es"</v>
+                <n n="Fontname" />
+                <v n="SizeFactor" t="Single">1</v>
+              </o>
+              <v>fr</v>
+              <o>
+                <v n="Language">"fr"</v>
+                <n n="Fontname" />
+                <v n="SizeFactor" t="Single">1</v>
+              </o>
+              <v>zh-CHS</v>
+              <o>
+                <v n="Language">"zh-CHS"</v>
+                <n n="Fontname" />
+                <v n="SizeFactor" t="Single">1</v>
+              </o>
+              <v>ja</v>
+              <o>
+                <v n="Language">"ja"</v>
+                <n n="Fontname" />
+                <v n="SizeFactor" t="Single">1</v>
+              </o>
+              <v>ru</v>
+              <o>
+                <v n="Language">"ru"</v>
+                <n n="Fontname" />
+                <v n="SizeFactor" t="Single">1</v>
+              </o>
+            </d2>
+          </o>
           <n n="FontDownloadConfig" />
           <n n="VisuInitializationCode" />
           <v n="GuidVisuSettingsPou">{798d1691-5454-4efc-92d3-fa8203bcbee3}</v>
@@ -664,6 +715,9 @@
         <Type n="IdCalculationHelper">{2e25ebe8-bd76-4922-82a8-9e4b7ca5f741}</Type>
         <Type n="Int32">System.Int32</Type>
         <Type n="Int64">System.Int64</Type>
+        <Type n="LanguageFontsConfiguration">{53e05a3b-2498-44d0-afdc-eaa7f08e78a1}</Type>
+        <Type n="Single">System.Single</Type>
+        <Type n="SingleLanguageFont">{3ce8bc11-ba9f-4be6-831b-d41efa3289a1}</Type>
         <Type n="String">System.String</Type>
         <Type n="TimeUnit">{58d66555-1558-40f4-a380-3a4ea48199c6}</Type>
         <Type n="UnicodeSupport">{19611221-ebd3-4607-86d2-9822fbe84c30}</Type>

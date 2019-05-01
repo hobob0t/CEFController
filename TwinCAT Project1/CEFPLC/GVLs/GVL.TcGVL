@@ -64,6 +64,7 @@ VAR_GLOBAL PERSISTENT
 
 	TempAlarmHigh:LREAL:=50;
 	TempAlarmLow:LREAL:=4;
+	TempRampModeAlarm:LREAL:=5;
 	
 	TempCalibrationLimit:REAL:=10;//in percent
 	HumCalibrationLimit:REAL:=10;//in percent

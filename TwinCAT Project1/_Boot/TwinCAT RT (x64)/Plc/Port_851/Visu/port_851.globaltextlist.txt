@@ -83,6 +83,8 @@ Id;Default
 946;PID Equation Ref.
 188;Programs
 938;Ramp
+1178;Ramp Mode Temp Limits
+749;Ramp Mode Temp Limits ±
 387;Rel. Humidity
 200;Saturday
 491;Schedule Sequence

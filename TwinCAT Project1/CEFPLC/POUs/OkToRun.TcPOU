@@ -32,25 +32,25 @@ IF GVL.manualMode=FALSE THEN
 	IF GVL.iState=1 THEN
 
 	
-		//Temperature Alarm Logic for STEP MODE
-		IF GVL.TempStepmode THEN
-			IF GVL.iState=1 AND GVL.Temp > (GVL.TempAlarmHigh) THEN
-				GVL.bCriticalAlarm:=TRUE;
-				GVL.sAlarmText:='High Temp Alarm';
-			END_IF
-			IF GVL.iState=1 AND GVL.Temp < (GVL.TempAlarmLow) THEN
-				GVL.bCriticalAlarm:=TRUE;
-				GVL.sAlarmText:='Low Temp Alarm';
-			END_IF
+		//Temperature Alarm Logic
+		
+		IF GVL.iState=1 AND GVL.Temp > (GVL.TempAlarmHigh) THEN
+			GVL.bCriticalAlarm:=TRUE;
+			GVL.sAlarmText:='High Temp Alarm';
 		END_IF
+		IF GVL.iState=1 AND GVL.Temp < (GVL.TempAlarmLow) THEN
+			GVL.bCriticalAlarm:=TRUE;
+			GVL.sAlarmText:='Low Temp Alarm';
+		END_IF
+		
 		
 		//Temperature alarm logic for RAMP MODE
 		IF GVL.TempStepmode=FALSE THEN
-			IF GVL.iState=1 AND GVL.Temp > (GVL.TempSetpoint+GVL.TempAlarmHigh) THEN
+			IF GVL.iState=1 AND GVL.Temp > (GVL.TempSetpoint+GVL.TempRampModeAlarm) THEN
 				GVL.bCriticalAlarm:=TRUE;
 				GVL.sAlarmText:='High Temp Alarm';
 			END_IF
-			IF GVL.iState=1 AND GVL.Temp < (GVL.TempSetpoint-GVL.TempAlarmLow) THEN
+			IF GVL.iState=1 AND GVL.Temp < (GVL.TempSetpoint-GVL.TempRampModeAlarm) THEN
 				GVL.bCriticalAlarm:=TRUE;
 				GVL.sAlarmText:='Low Temp Alarm';
 			END_IF

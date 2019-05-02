@@ -12,8 +12,6 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[GVL.Temp := 0.010071*INT_TO_LREAL(GVL.tempSensor) - 39.996;//See documentation for sensor
-
-
 GVL.Humidity := (INT_TO_LREAL(IO_VARS.HUM_SENS)/3.2767)*100/5000;
 
 GVL.Temp2 := 0.010071*INT_TO_LREAL(GVL.tempSensor2) - 39.996;//See documentation for sensor
@@ -21,26 +19,26 @@ GVL.Humidity2 := (INT_TO_LREAL(IO_VARS.HUM_SENS2)/3.2767)*100/5000;
 
 IO_VARS.ALARM:=GVL.bCriticalAlarm;//alarm buzzer
 
-
+//////////////VARIABLE FAN SPEED NOT USED IN TCR120////////////////////
 //Check this variable just to make sure we don't break anything
-IF GVL.HMIFanSpeed>100 THEN
-	GVL.HMIFanSpeed:=100;
-END_IF
+//IF GVL.HMIFanSpeed>100 THEN
+//	GVL.HMIFanSpeed:=100;
+//END_IF
+//
+//IF GVL.HMIFanSpeed<0 THEN
+//	GVL.HMIFanSpeed:=0;
+//END_IF
 
-IF GVL.HMIFanSpeed<0 THEN
-	GVL.HMIFanSpeed:=0;
-END_IF
-
-IO_VARS.FANSPEED := REAL_TO_INT(16384*-50*LOG(0.00001*(63949-630*GVL.HMIFanSpeed))/100);//Scaling. outout is nonlinear for this board. Equation is x = -50 log(.00001(63949 - 630 y))
-	
-IF IO_VARS.FANSPEED>16385 THEN
-	IO_VARS.FANSPEED:=16385;//DO NOT EXCEED 5 VOLTS FOR THAT CONTROL BOARD
-END_IF
-
-IF IO_VARS.FANSPEED<3276 THEN
-	IO_VARS.FANSPEED:=3276;//IT'S DANGERIOUS TO RUN THE CHAMBER WITH THE FANS COMPLETELY OFF
-END_IF
-
+//IO_VARS.FANSPEED := REAL_TO_INT(16384*-50*LOG(0.00001*(63949-630*GVL.HMIFanSpeed))/100);//Scaling. outout is nonlinear for this board. Equation is x = -50 log(.00001(63949 - 630 y))
+//	
+//IF IO_VARS.FANSPEED>16385 THEN
+//	IO_VARS.FANSPEED:=16385;//DO NOT EXCEED 5 VOLTS FOR THAT CONTROL BOARD
+//END_IF
+//
+//IF IO_VARS.FANSPEED<3276 THEN
+//	IO_VARS.FANSPEED:=3276;//IT'S DANGERIOUS TO RUN THE CHAMBER WITH THE FANS COMPLETELY OFF
+//END_IF
+//////////////////////////////////////////////////////////////////
 
 IF GVL.manualMode=FALSE THEN
 	
@@ -57,48 +55,30 @@ IF GVL.manualMode=FALSE THEN
 		
 	////////////MAPPING METAL HALIDE LIGHTS/////////////
 	IF GVL.Light1Level=0 THEN
-		IO_VARS.MH1:=0;
-		IO_VARS.MH2:=0;
-		IO_VARS.MH3:=0;
+		IO_VARS.FL1:=0;
+		IO_VARS.FL2:=0;
+		IO_VARS.FL3:=0;
 	ELSIF  GVL.Light1Level=1 THEN
-		IO_VARS.MH1:=1;
-		IO_VARS.MH2:=0;
-		IO_VARS.MH3:=0;
+		IO_VARS.FL1:=1;
+		IO_VARS.FL2:=0;
+		IO_VARS.FL3:=0;
 	ELSIF  GVL.Light1Level=2 THEN
-		IO_VARS.MH1:=1;
-		IO_VARS.MH2:=1;
-		IO_VARS.MH3:=0;
+		IO_VARS.FL1:=1;
+		IO_VARS.FL2:=1;
+		IO_VARS.FL3:=0;
 	ELSIF  GVL.Light1Level=3 THEN
-		IO_VARS.MH1:=1;
-		IO_VARS.MH2:=1;
-		IO_VARS.MH3:=1;
+		IO_VARS.FL1:=1;
+		IO_VARS.FL2:=1;
+		IO_VARS.FL3:=1;
 	END_IF
 	
-	////////////MAPPING HIGH PRESSURE SODIUM LIGHTS/////////////
-	IF GVL.Light2Level=0 THEN
-		IO_VARS.HPS1:=0;
-		IO_VARS.HPS2:=0;
-		IO_VARS.HPS3:=0;
-	ELSIF  GVL.Light2Level=1 THEN
-		IO_VARS.HPS1:=1;
-		IO_VARS.HPS2:=0;
-		IO_VARS.HPS3:=0;
-	ELSIF  GVL.Light2Level=2 THEN
-		IO_VARS.HPS1:=1;
-		IO_VARS.HPS2:=1;
-		IO_VARS.HPS3:=0;
-	ELSIF  GVL.Light2Level=3 THEN
-		IO_VARS.HPS1:=1;
-		IO_VARS.HPS2:=1;
-		IO_VARS.HPS3:=1;
-	END_IF
+	////////////MAPPING INCANDESCENT LIGHTS/////////////
+
 	
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="IO">
       <LineId Id="5" Count="0" />
-      <LineId Id="231" Count="0" />
-      <LineId Id="237" Count="0" />
       <LineId Id="74" Count="0" />
       <LineId Id="222" Count="1" />
       <LineId Id="221" Count="0" />
@@ -136,13 +116,7 @@ END_IF]]></ST>
       <LineId Id="105" Count="1" />
       <LineId Id="97" Count="0" />
       <LineId Id="20" Count="0" />
-      <LineId Id="109" Count="6" />
-      <LineId Id="127" Count="1" />
-      <LineId Id="118" Count="1" />
-      <LineId Id="129" Count="1" />
-      <LineId Id="122" Count="1" />
-      <LineId Id="131" Count="1" />
-      <LineId Id="126" Count="0" />
+      <LineId Id="109" Count="1" />
       <LineId Id="108" Count="0" />
       <LineId Id="46" Count="0" />
       <LineId Id="152" Count="0" />

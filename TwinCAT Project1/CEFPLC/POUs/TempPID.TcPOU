@@ -37,7 +37,7 @@ PIDHeating(
 	fActualValue:=GVL.Temp, 
 	bReset:=bResetHeat, 
 	fCtrlCycleTime:=1, 
-	fKp:=GVL.KpHeating - ((GVL.Light1Level + GVL.Light2Level)/GVL.lightLoad)*GVL.KpHeating, //If the lights are on, you really don't need that much heating. So we scale it back based on how many lights are on.
+	fKp:=GVL.KpHeating - ((GVL.Light1Percent + GVL.Light2Percent)/GVL.lightLoad)*GVL.KpHeating, //If the lights are on, you really don't need that much heating. So we scale it back based on how many lights are on.
 	fTn:=GVL.KiHeating, 
 	fTv:=GVL.KvHeating, 
 	fTd:=GVL.KdHeating);

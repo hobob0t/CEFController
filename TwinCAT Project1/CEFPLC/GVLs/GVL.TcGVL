@@ -39,7 +39,7 @@ VAR_GLOBAL PERSISTENT
 	valveDeadZone:LREAL:=15000;
 	//How much to scale the heat back when there are lights on. (See TempPID program)
 	//This number is unitless and is based on experimental results.
-	lightLoad:LREAL:=14;
+	lightLoad:LREAL:=400;
 	
 	KpCooling : LREAL := 10;
 	KiCooling : LREAL := 550;

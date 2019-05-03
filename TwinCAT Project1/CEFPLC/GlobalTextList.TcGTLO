@@ -166,6 +166,21 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"1297"</v>
+              <v n="TextDefault">"Fluorescent  Lvl 3"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"989"</v>
+              <v n="TextDefault">"Fluorescent Lvl 1"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"1259"</v>
+              <v n="TextDefault">"Fluorescent Lvl 2"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"581"</v>
               <v n="TextDefault">"For this many seconds:"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -292,6 +307,11 @@ and stop."</v>
 the setpoint
 
 In step mode, these are absolute values"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"1030"</v>
+              <v n="TextDefault">"Incandescent"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>

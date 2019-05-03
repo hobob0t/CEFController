@@ -80,12 +80,12 @@ VAR_GLOBAL PERSISTENT
 	
 	
 	//Setpoint variable declariations
-	Light1Max:INT:=2; //Max light level
+	Light1Max:INT:=3; //Max light level
 	Light1Level:INT; //Current light level
 	Light1Percent:REAL; //Current light level in percent of max
 	Light1Stepmode:BOOL;
 	
-	Light2Max:INT:=2; //Max light level
+	Light2Max:INT:=16384; //Max light level
 	Light2Level:INT; //Current light level
 	Light2Percent:REAL; //Current light level in percent of max
 	Light2Stepmode:BOOL;

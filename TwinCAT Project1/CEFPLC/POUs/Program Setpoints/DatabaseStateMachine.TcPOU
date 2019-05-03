@@ -114,7 +114,7 @@ CASE iState OF
 		
 	2:
 		//GET LIGHT 1 LEVEL
-		QueryProgram(sColumn:='[Light1_MH]');
+		QueryProgram(sColumn:='[Light1]');
 		
 		IF QueryProgram.bSuccess THEN
 				iState:=iState+1;
@@ -128,7 +128,7 @@ CASE iState OF
 		END_IF
 	3:
 		//GET LIGHT 2 LEVEL
-		QueryProgram(sColumn:='[Light2_HPS]');
+		QueryProgram(sColumn:='[Light2]');
 		
 		IF QueryProgram.bSuccess THEN
 				iState:=iState+1;

@@ -31,6 +31,9 @@ Id;Default
 409;DO 9
 656;Enable
 948;Fan Speed %
+1297;Fluorescent  Lvl 3
+989;Fluorescent Lvl 1
+1259;Fluorescent Lvl 2
 581;For this many seconds:
 82;Friday
 191;Graph
@@ -55,6 +58,7 @@ Id;Default
 396;If the percent difference between$R$Nthe two sensors is greater than $R$Nthese values, the system will alarm$R$Nand stop.
 79;If the percent difference between the two sensors is greater than these values, the system will alarm and stop.
 244;In ramp mode, this is the deviation from $R$Nthe setpoint$R$N$R$NIn step mode, these are absolute values
+1030;Incandescent
 193;IO
 941;Kp
 657;Level 1 Light

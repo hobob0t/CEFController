@@ -35,7 +35,7 @@
       <Name>iTempControl</Name>
       <Type>SmallInt</Type>
       <Mode>MAPPED</Mode>
-      <MappedSymbolID>12</MappedSymbolID>
+      <MappedSymbolID>3</MappedSymbolID>
     </Column>
     <Column>
       <Name>Humidity</Name>
@@ -56,13 +56,13 @@
       <MappedSymbolID>5</MappedSymbolID>
     </Column>
     <Column>
-      <Name>Light1_MH</Name>
+      <Name>Light1</Name>
       <Type>SmallInt</Type>
       <Mode>MAPPED</Mode>
       <MappedSymbolID>6</MappedSymbolID>
     </Column>
     <Column>
-      <Name>Light2_HPS</Name>
+      <Name>Light2</Name>
       <Type>SmallInt</Type>
       <Mode>MAPPED</Mode>
       <MappedSymbolID>7</MappedSymbolID>

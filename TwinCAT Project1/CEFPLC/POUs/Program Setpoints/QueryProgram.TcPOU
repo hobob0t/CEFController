@@ -196,7 +196,7 @@ END_IF
 
 255:
 	//Record the error....I need to change this to actually record the errors
-		ADSLOGSTR(msgCtrlMask := ADSLOG_MSGTYPE_ERROR OR ADSLOG_MSGTYPE_MSGBOX, msgFmtStr := 'Oh god what have you done? %s', strArg := WSTRING_TO_STRING(result.Text));
+		//ADSLOGSTR(msgCtrlMask := ADSLOG_MSGTYPE_ERROR OR ADSLOG_MSGTYPE_MSGBOX, msgFmtStr := 'Oh god what have you done? %s', strArg := WSTRING_TO_STRING(result.Text));
 		iState:=0;	
 		bError := TRUE;
 		result := fbSqlResult.ipTcResultEvent;

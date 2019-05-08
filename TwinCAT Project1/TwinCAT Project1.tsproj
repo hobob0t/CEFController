@@ -51,6 +51,14 @@
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
 						<Var>
+							<Name>GVL.tempSensor</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL.tempSensor2</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
 							<Name>IO_VARS.PRESSURE_SENSE</Name>
 							<Type>BOOL</Type>
 						</Var>
@@ -62,17 +70,13 @@
 							<Name>IO_VARS.HUM_SENS2</Name>
 							<Type>INT</Type>
 						</Var>
-						<Var>
-							<Name>GVL.tempSensor</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL.tempSensor2</Name>
-							<Type>INT</Type>
-						</Var>
 					</Vars>
 					<Vars VarGrpType="2">
 						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>GVL.iTempControl</Name>
+							<Type>INT</Type>
+						</Var>
 						<Var>
 							<Name>IO_VARS.ENABLE</Name>
 							<Type>BOOL</Type>
@@ -126,10 +130,6 @@
 						</Var>
 						<Var>
 							<Name>IO_VARS.FANSPEED</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL.iTempControl</Name>
 							<Type>INT</Type>
 						</Var>
 					</Vars>
